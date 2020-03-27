@@ -2311,7 +2311,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rainPrefab: {fileID: 1815897455353550, guid: 7d744e4ad32a5404e91fd1c4f4dde5db, type: 2}
-  interval: 4
+  interval: 1
   xMinPosition: -6
   xMaxPosition: 11
   yMinPosition: 10
@@ -5326,7 +5326,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.032805383, y: 0.022387266}
+  m_Offset: {x: -0.032805383, y: -1.4325433}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -5337,7 +5337,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.8395773, y: 3.735519}
+  m_Size: {x: 1.8395773, y: 0.82565784}
   m_EdgeRadius: 0
 --- !u!50 &1568500618
 Rigidbody2D:
@@ -5785,7 +5785,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rainPrefab: {fileID: 1815897455353550, guid: 7d744e4ad32a5404e91fd1c4f4dde5db, type: 2}
-  interval: 3
+  interval: 4
   xMinPosition: -6
   xMaxPosition: 11
   yMinPosition: 10
@@ -6594,7 +6594,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.16425747, y: 0.13532808}
+  m_Offset: {x: 0.16425747, y: -1.3440547}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -6605,7 +6605,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.83964, y: 0.27075619}
+  m_Size: {x: 1.83964, y: 3.2295218}
   m_EdgeRadius: 0
 --- !u!212 &1862496388
 SpriteRenderer:
