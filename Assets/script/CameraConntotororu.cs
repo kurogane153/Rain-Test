@@ -24,6 +24,7 @@ public class CameraConntotororu : MonoBehaviour
     private bool flg = false;
     private bool flg2 = false;
     public bool CameraMoveSwitch = false;
+    private bool fix3d;
     float PlayerY_Save = 0.0f; // ジャンプする前のプレイヤーの位置
 
     void Start()
@@ -69,6 +70,18 @@ public class CameraConntotororu : MonoBehaviour
 
     }
 
+    void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag != "floor") {
+            fix3d = true;
+        }
+    }
+
+    void OnCollisionExit2D(Collision2D collision)
+    {
+        fix3d = false;
+    }
+
     // プレイヤーが雨に当たっているかどうか
     void PlayerOnRain()
     {
@@ -85,7 +98,7 @@ public class CameraConntotororu : MonoBehaviour
     void CameraMoveOnRain()
     {
         CameraMoveSwitch = false;
-        if (fix == true)
+        if (fix == true||fix3d == true)
         {
             CameraMoveSwitch = true; // カメラを移動する
             fix2 = true;
@@ -93,17 +106,20 @@ public class CameraConntotororu : MonoBehaviour
         // カメラを動かすスイッチがオンのとき
         if (CameraMoveSwitch == true)
         {
-            if (Player.transform.position.y >= mainCamera.transform.position.y)
+            if (Player.transform.position.y >= 0)
             {
-                Y_camera = mainCamera.transform.position.y;
-                Y_camera += 0.10f;
-                mainCamera.transform.position = new Vector3(Player.transform.position.x, Y_camera, zAdjust);
-            }
-            if (Player.transform.position.y <= mainCamera.transform.position.y)
-            {
-                Y_camera = mainCamera.transform.position.y;
-                Y_camera -= 0.10f;
-                mainCamera.transform.position = new Vector3(Player.transform.position.x, Y_camera, zAdjust);
+                if (Player.transform.position.y >= mainCamera.transform.position.y)
+                {
+                    Y_camera = mainCamera.transform.position.y;
+                    Y_camera += 0.10f;
+                    mainCamera.transform.position = new Vector3(Player.transform.position.x, Y_camera, zAdjust);
+                }
+                if (Player.transform.position.y <= mainCamera.transform.position.y)
+                {
+                    Y_camera = mainCamera.transform.position.y;
+                    Y_camera -= 0.10f;
+                    mainCamera.transform.position = new Vector3(Player.transform.position.x, Y_camera, zAdjust);
+                }
             }
         }
         else

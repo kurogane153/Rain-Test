@@ -101,9 +101,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0.05
   fix: 0
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 512
+  mainsprite: {fileID: 21300000, guid: b7011a6818d004e418019b2b158793fd, type: 3}
+  sabsprite: {fileID: 21300000, guid: fe391b52348665746806eb9e8d104ce2, type: 3}
 --- !u!212 &212147061397474912
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -140,7 +139,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: b7011a6818d004e418019b2b158793fd, type: 3}
-  m_Color: {r: 0.3832931, g: 0.2713154, b: 0.8584906, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

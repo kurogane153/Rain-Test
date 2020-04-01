@@ -36,23 +36,38 @@ public class TestJump_ver2 : MonoBehaviour {
     private bool isJumpingCheck = true;
     private bool isJumping = false;
     private float JumpPower;
-    private float gravityRate = 1.5f;
+
+    [Header("落下重力")]
+    [SerializeField, Range(0f, 10f)]    private float gravityRate = 1.5f;
+
+    [Header("軽減率")]
+    [SerializeField, Range(0f, 10f)]
     private float jumpPowerAttenuation = 0.5f;
+
+    private float vo = 9;
+    private float HORIZONTAL_Y = 0;
+
+    private float JumpSpeed = 35;
 
     //タメジャンプ
     public float Jumpcnt = 0;
     private const float MAX_COUNT = 0.5f;
     public float Jumpcnt_2 = 0;
 
-    //調査中
-    //GameObject JumpManager;
+    public Vector3 restartPoint;
 
+    public bool fix = false;
+    private GameObject Res;
+    public bool res = false;
+
+    Animator _animator;
 
     void Start()
     {
+        Res = GameObject.Find("Fade");
         rb2d = GetComponent<Rigidbody2D>();
-        //調査中
-        //JumpManager = GameObject.Find("JumpManager");
+        restartPoint = this.transform.position;
+        _animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -83,11 +98,24 @@ public class TestJump_ver2 : MonoBehaviour {
         {
             x = -speed;
         }
+        if (Input.GetAxis("Horizontal") == 1 || Input.GetAxis("Horizontal") == -1)
+        {
+            if (jumpKey == 0)
+            {
+                _animator.SetBool("key", true);
+            }
+
+        }else if (Input.GetAxis("Horizontal") == 0)
+        {
+            _animator.SetBool("key", false);
+        }
 
         // ジャンプキー取得
         if (Input.GetButtonDown("X")||Input.GetKeyDown(KeyCode.Space))
         {
             jumpKey = 1;
+            _animator.SetBool("Jump", true);
+
         }
         else if (Input.GetButton("X")||Input.GetKey(KeyCode.Space))
         {
@@ -96,6 +124,7 @@ public class TestJump_ver2 : MonoBehaviour {
         }
         else if (Input.GetButtonUp("X")||Input.GetKeyUp(KeyCode.Space))
         {
+            _animator.SetBool("Jump", false);
             jumpKey = 0;
         }
 
@@ -103,7 +132,25 @@ public class TestJump_ver2 : MonoBehaviour {
         Debug.DrawLine(groundedStart, groundedEnd, Color.red);
         Debug.DrawLine(leftgroundedStart, leftgroundedEnd, Color.red);
         Debug.DrawLine(rightgroundedStart, rightgroundedEnd, Color.red);
+    }
 
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Respaen")
+        {
+            restartPoint = collision.transform.position;
+            Destroy(collision.gameObject);
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        fix = true;   
+    }
+
+    void OnCollisionExit2D(Collision2D collision)
+    {
+        fix = false;
     }
 
     void FixedUpdate()
@@ -123,7 +170,7 @@ public class TestJump_ver2 : MonoBehaviour {
                     JumpTimeCounter = 1f;
                     isJumpingCheck = false;
                     isJumping = true;
-                    JumpPower = 35f;
+                    JumpPower = JumpSpeed;
                     rb2d.AddForce(new Vector2(rb2d.velocity.x, JumpPower));
                 }
             }
