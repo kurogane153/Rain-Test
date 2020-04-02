@@ -102,19 +102,18 @@ public class TestJump_ver2 : MonoBehaviour {
         {
             if (jumpKey == 0)
             {
-                _animator.SetBool("key", true);
+                _animator.SetFloat("walk", Input.GetAxis("Horizontal"));
             }
 
         }else if (Input.GetAxis("Horizontal") == 0)
         {
-            _animator.SetBool("key", false);
+            _animator.SetFloat("walk", Input.GetAxis("Horizontal"));
         }
 
         // ジャンプキー取得
         if (Input.GetButtonDown("X")||Input.GetKeyDown(KeyCode.Space))
         {
             jumpKey = 1;
-            _animator.SetBool("Jump", true);
 
         }
         else if (Input.GetButton("X")||Input.GetKey(KeyCode.Space))
@@ -124,7 +123,7 @@ public class TestJump_ver2 : MonoBehaviour {
         }
         else if (Input.GetButtonUp("X")||Input.GetKeyUp(KeyCode.Space))
         {
-            _animator.SetBool("Jump", false);
+           
             jumpKey = 0;
         }
 
@@ -155,6 +154,7 @@ public class TestJump_ver2 : MonoBehaviour {
 
     void FixedUpdate()
     {
+        _animator.SetBool("Jump", false);
         x = Input.GetAxis("Horizontal");
         gameObject.transform.position += new Vector3(x * speed, 0);
 
@@ -178,6 +178,7 @@ public class TestJump_ver2 : MonoBehaviour {
         //地面にいない（空中にいる判定）
         else
         {
+            _animator.SetBool("Jump", true);
             //ジャンプキーが離されたらジャンプ中のフラグをfalseにする
             if (jumpKey == 0)
             {
