@@ -47,7 +47,7 @@ public class TestJump_ver2 : MonoBehaviour {
     private float vo = 9;
     private float HORIZONTAL_Y = 0;
 
-    private float JumpSpeed = 35;
+    private float JumpSpeed = 39;
 
     //タメジャンプ
     public float Jumpcnt = 0;
