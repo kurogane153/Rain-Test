@@ -9,10 +9,12 @@ public class RainOperation : MonoBehaviour {
     public bool fix = false;
     public Sprite mainsprite;
     public Sprite sabsprite;
+    GameObject TW; // The_World_Itemオブジェクト
 
     void Start()
     {
         MainSpriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        TW = GameObject.Find("The_World_Item");
     }
 
     void Update ()
@@ -27,7 +29,7 @@ public class RainOperation : MonoBehaviour {
 
     void RainMove()
     {
-        if (fix == false)
+        if (fix == false && TW.gameObject.GetComponent<The_World>().The_World_Switch != true)
         {
             this.transform.Translate(0, -speed, 0);
         }
