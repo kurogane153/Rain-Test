@@ -5,13 +5,13 @@ using UnityEngine;
 public class Tornado : MonoBehaviour
 {
 
-    private GameObject Player;
+    public GameObject Player;
     bool HighJump = false;
     int HighJumpTime = 0;
 
     void Start()
     {
-        Player = GameObject.Find("Player");
+        //Player = GameObject.Find("Player");
     }
 
     void OnCollisionEnter2D(Collision2D collision)

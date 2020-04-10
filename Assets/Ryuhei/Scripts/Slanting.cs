@@ -11,6 +11,7 @@ public class Slanting : MonoBehaviour
     public float AreaX2 = 40.0f; //     ■■■■
     public float AreaY1 = 40.0f; //     ■■■■
     public float AreaY2 = 0.0f;  //   Y2■■■■
+    public float RainRot = -10.0f; // 雨の回転角度
 
     // Use this for initialization
     void Start()
@@ -35,7 +36,7 @@ public class Slanting : MonoBehaviour
                     // トランスフォームを取得
                     Transform myTransform = this.transform;
 
-                    myTransform.transform.rotation = Quaternion.Euler(new Vector3(0, 0, -10));
+                    myTransform.transform.rotation = Quaternion.Euler(new Vector3(0, 0, RainRot));
 
                     //// 自身の移動
                     //Vector3 pos = this.transform.position;
