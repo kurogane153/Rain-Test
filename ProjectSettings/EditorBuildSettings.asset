@@ -5,18 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Gima/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 0
-    path: Assets/Gima/Rain_Main.unity
-    guid: 995c7cdbbf888c54cb72963ba30ccc0f
   - enabled: 1
-<<<<<<< HEAD
     path: Assets/Ryuhei/Scene/Last_Ryuhei.unity
     guid: 47be3fdf44450d7429fedc183eae07e0
-=======
-    path: Assets/Gima/Rast.unity
-    guid: 1ca597c252ec2544fb4c569696808e0d
->>>>>>> master
   m_configObjects: {}
