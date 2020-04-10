@@ -6,10 +6,10 @@ public class FadeScript : MonoBehaviour
 {
     float alfa;
     float alfa2 =0.0f;
-    [SerializeField, Range(0f, 5f)] private float speed = 0.02f;
+    [SerializeField, Range(0f, 5f)] private float speed = 0.05f;
 
     [Header("死までの高さ調整")]
-    [SerializeField, Range(-20, 0f)] private float dead = -2;
+    [SerializeField, Range(-20, 0f)] private float dead = -5;
 
     float red, green, blue;
     Color color;
