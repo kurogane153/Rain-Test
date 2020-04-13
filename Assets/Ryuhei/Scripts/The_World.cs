@@ -6,7 +6,7 @@ public class The_World : MonoBehaviour
 {
 
     public bool The_World_Switch = false;
-    public const int THE_WORLD_TIME = 600; // 参照用 18秒くらい
+    public const int THE_WORLD_TIME = 500; // 参照用 15秒くらい
     private int The_World_Time = THE_WORLD_TIME; // 時止め時間
 
     // ザ・ワールド

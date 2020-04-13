@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbc98360dad4ba546832659da8f58954, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rainPrefab: {fileID: 1815897455353550, guid: 7d744e4ad32a5404e91fd1c4f4dde5db, type: 2}
+  rainPrefab: {fileID: 1815897455353550, guid: 7afb91ab68c8d5b4698a87bf970d2499, type: 2}
   interval: 1
 --- !u!212 &212227983018068158
 SpriteRenderer:

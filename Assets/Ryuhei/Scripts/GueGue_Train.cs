@@ -23,6 +23,14 @@ public class GueGue_Train : MonoBehaviour
 
     void Update()
     {
+
+        // あひるの再生成
+        if (this.transform.position.y <= 30.0f)
+        {
+            StartSwitch = false;
+            transform.position = new Vector3(147, 112.0f, 0.0f);
+        }
+
         if (StartSwitch == true)
         {
             defaultPosition = transform.position;

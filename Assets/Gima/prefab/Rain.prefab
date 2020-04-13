@@ -23,9 +23,14 @@ GameObject:
   - component: {fileID: 61591164739384412}
   - component: {fileID: 50350146602833854}
   - component: {fileID: 114478566100776974}
-  - component: {fileID: 114903201884549202}
+  - component: {fileID: 114688666120583868}
   - component: {fileID: 114062653039999114}
   - component: {fileID: 114130447289077756}
+  - component: {fileID: 114238171022597530}
+  - component: {fileID: 114903201884549202}
+  - component: {fileID: 114128005135928102}
+  - component: {fileID: 114406801129019834}
+  - component: {fileID: 114519763441903674}
   m_Layer: 8
   m_Name: Rain
   m_TagString: Rain
@@ -107,6 +112,22 @@ MonoBehaviour:
   AreaY1: 999
   AreaY2: 0
   RainRot: 180
+--- !u!114 &114128005135928102
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1815897455353550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e179720351c403c4cadd8fc1e20caa48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AreaX1: 400
+  AreaX2: 600
+  AreaY1: 170
+  AreaY2: 160
+  RainRot: -10
 --- !u!114 &114130447289077756
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -120,9 +141,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AreaX1: 330
   AreaX2: 380
-  AreaY1: 999
+  AreaY1: 160
   AreaY2: 0
   RainRot: -10
+--- !u!114 &114238171022597530
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1815897455353550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e179720351c403c4cadd8fc1e20caa48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AreaX1: 400
+  AreaX2: 600
+  AreaY1: 190
+  AreaY2: 180
+  RainRot: 10
+--- !u!114 &114406801129019834
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1815897455353550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e179720351c403c4cadd8fc1e20caa48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AreaX1: 400
+  AreaX2: 600
+  AreaY1: 160
+  AreaY2: 150
+  RainRot: 0
 --- !u!114 &114478566100776974
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -138,6 +191,38 @@ MonoBehaviour:
   fix: 0
   mainsprite: {fileID: 21300000, guid: b6703d36e67488047b06385fbbf1f44f, type: 3}
   sabsprite: {fileID: 21300000, guid: 806cec794436c454c9f64ed52c047af3, type: 3}
+--- !u!114 &114519763441903674
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1815897455353550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e179720351c403c4cadd8fc1e20caa48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AreaX1: 400
+  AreaX2: 600
+  AreaY1: 240
+  AreaY2: 200
+  RainRot: 20
+--- !u!114 &114688666120583868
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1815897455353550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e179720351c403c4cadd8fc1e20caa48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AreaX1: 79
+  AreaX2: 123
+  AreaY1: 999
+  AreaY2: 0
+  RainRot: 180
 --- !u!114 &114903201884549202
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -151,9 +236,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AreaX1: 400
   AreaX2: 600
-  AreaY1: 999
-  AreaY2: 0
-  RainRot: -10
+  AreaY1: 180
+  AreaY2: 170
+  RainRot: 0
 --- !u!212 &212147061397474912
 SpriteRenderer:
   m_ObjectHideFlags: 1
