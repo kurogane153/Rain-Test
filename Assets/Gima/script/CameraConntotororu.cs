@@ -37,8 +37,16 @@ public class CameraConntotororu : MonoBehaviour
     {
 
         fix = false;
-        PlayerOnGrand(); // プレイヤーが地面に立っているかどうか
-        PlayerOnRain(); // プレイヤーが雨に当たっているかどうか
+        if (Player.gameObject.GetComponent<TestJump_ver2>().Debug_F == false)
+        {
+            PlayerOnGrand(); // プレイヤーが地面に立っているかどうか
+            PlayerOnRain(); // プレイヤーが雨に当たっているかどうか
+        }
+        else
+        {
+            mainCamera.transform.position = new Vector3(Player.transform.position.x,
+                Player.transform.position.y, zAdjust);
+        }
     }
 
     void FixedUpdate()

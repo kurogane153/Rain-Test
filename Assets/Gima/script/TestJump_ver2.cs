@@ -11,6 +11,7 @@ public class TestJump_ver2 : MonoBehaviour {
     //ジャンプキー入力
     private int jumpKey = 0;
     private float x;
+    private float y;
 
     //ラインキャストで地面にいるかどうかの判定に必要なやーつ
     private bool isGrounded = true;
@@ -60,6 +61,8 @@ public class TestJump_ver2 : MonoBehaviour {
     private GameObject Res;
     public bool res = false;
 
+    public bool Debug_F = false;
+
     Animator _animator;
 
     void Start()
@@ -71,6 +74,36 @@ public class TestJump_ver2 : MonoBehaviour {
     }
 
     void Update()
+    {
+        if ((Input.GetButtonDown("Debug") || 
+            Input.GetKeyDown(KeyCode.Backspace)) && Debug_F == false)
+        {
+            Debug_F = true;
+
+        }
+        else if ((Input.GetButtonDown("Debug") || 
+            Input.GetKeyDown(KeyCode.Backspace)) && Debug_F == true)
+        {
+            Debug_F = false;
+        }
+
+        if (!Debug_F)
+        {
+            GroundEnter();
+
+            InputKey();
+        }
+        else
+        {
+            DebugMove();
+            //デバッグ用
+            Debug.DrawLine(groundedStart, groundedEnd, Color.red);
+            Debug.DrawLine(leftgroundedStart, leftgroundedEnd, Color.red);
+            Debug.DrawLine(rightgroundedStart, rightgroundedEnd, Color.red);
+        }
+    }
+
+    void GroundEnter()
     {
         //地面判定取得
         //真下
@@ -87,7 +120,10 @@ public class TestJump_ver2 : MonoBehaviour {
         isRightGrounded = Physics2D.Linecast(rightgroundedStart, rightgroundedEnd, groundLayer);
 
         isGrounded = rb2d.IsTouching(filter2D);
+    }
 
+    void InputKey()
+    {
         //移動関連
 
         if (Input.GetKey(KeyCode.RightArrow))
@@ -105,32 +141,60 @@ public class TestJump_ver2 : MonoBehaviour {
                 _animator.SetFloat("walk", Input.GetAxis("Horizontal"));
             }
 
-        }else if (Input.GetAxis("Horizontal") == 0)
+        }
+        else if (Input.GetAxis("Horizontal") == 0)
         {
             _animator.SetFloat("walk", Input.GetAxis("Horizontal"));
         }
 
         // ジャンプキー取得
-        if (Input.GetButtonDown("X")||Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetButtonDown("X") || Input.GetKeyDown(KeyCode.Space))
         {
             jumpKey = 1;
 
         }
-        else if (Input.GetButton("X")||Input.GetKey(KeyCode.Space))
+        else if (Input.GetButton("X") || Input.GetKey(KeyCode.Space))
         {
             jumpKey = 2;
 
         }
-        else if (Input.GetButtonUp("X")||Input.GetKeyUp(KeyCode.Space))
+        else if (Input.GetButtonUp("X") || Input.GetKeyUp(KeyCode.Space))
         {
-           
+
             jumpKey = 0;
         }
+    }
 
-        //デバッグ用
-        Debug.DrawLine(groundedStart, groundedEnd, Color.red);
-        Debug.DrawLine(leftgroundedStart, leftgroundedEnd, Color.red);
-        Debug.DrawLine(rightgroundedStart, rightgroundedEnd, Color.red);
+    void DebugMove()
+    {
+        bool keyflg=false;
+        rb2d.velocity = Vector3.zero;
+        if (Input.GetKey(KeyCode.RightArrow))
+        {
+            transform.Translate(speed, 0, 0);
+            keyflg = true;
+        }
+        if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            transform.Translate(-speed, 0, 0);
+            keyflg = true;
+        }
+        if (Input.GetKey(KeyCode.UpArrow))
+        {
+            transform.Translate(0, speed, 0);
+            keyflg = true;
+        }
+        if (Input.GetKey(KeyCode.DownArrow))
+        {
+            transform.Translate(0, -speed, 0);
+            keyflg = true;
+        }
+        if (keyflg == false)
+        {
+            x = Input.GetAxis("Horizontal");
+            y = Input.GetAxis("Vertical");
+            gameObject.transform.position += new Vector3(x * speed, y * speed);
+        }
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -154,87 +218,90 @@ public class TestJump_ver2 : MonoBehaviour {
 
     void FixedUpdate()
     {
-        _animator.SetBool("Jump", false);
-        x = Input.GetAxis("Horizontal");
-        gameObject.transform.position += new Vector3(x * speed, 0);
-
-        //地面にいるとき
-        if (isGrounded)
+        if (!Debug_F)
         {
-            //飛べるかどうかのフラグがtrueかつジャンプキーが押されたら
-            //各種フラグ,数値を代入
-            if (isJumpingCheck)
+            _animator.SetBool("Jump", false);
+            x = Input.GetAxis("Horizontal");
+            gameObject.transform.position += new Vector3(x * speed, 0);
+
+            //地面にいるとき
+            if (isGrounded)
             {
-                if (Jumpcnt < MAX_COUNT && jumpKey != 0)
+                //飛べるかどうかのフラグがtrueかつジャンプキーが押されたら
+                //各種フラグ,数値を代入
+                if (isJumpingCheck)
                 {
-                    JumpTimeCounter = 1f;
-                    isJumpingCheck = false;
-                    isJumping = true;
-                    JumpPower = JumpSpeed;
-                    rb2d.AddForce(new Vector2(rb2d.velocity.x, JumpPower));
+                    if (Jumpcnt < MAX_COUNT && jumpKey != 0)
+                    {
+                        JumpTimeCounter = 1f;
+                        isJumpingCheck = false;
+                        isJumping = true;
+                        JumpPower = JumpSpeed;
+                        rb2d.AddForce(new Vector2(rb2d.velocity.x, JumpPower));
+                    }
                 }
             }
-        }
-        //地面にいない（空中にいる判定）
-        else
-        {
-            _animator.SetBool("Jump", true);
-            //ジャンプキーが離されたらジャンプ中のフラグをfalseにする
-            if (jumpKey == 0)
-            {
-                isJumping = false;
-            }
-            //veloctityが規定値より下回ったら重力を使って落とす
-            if (jumpKey == 0 || Jumpcnt>=MAX_COUNT)
-            {
-                rb2d.AddForce(new Vector2(rb2d.velocity.x, Physics.gravity.y * gravityRate * 2.5f));
-            }
-            //veloctityが規定値よりも上回っていたら
+            //地面にいない（空中にいる判定）
             else
             {
-                //ジャンプパワーがあるなら二倍の軽減率で減少させ飛ばす
-                if (0 <= JumpPower)
+                _animator.SetBool("Jump", true);
+                //ジャンプキーが離されたらジャンプ中のフラグをfalseにする
+                if (jumpKey == 0)
                 {
-                    JumpPower -= jumpPowerAttenuation * 3;
-                    rb2d.AddForce(new Vector2(rb2d.velocity.x, JumpPower));
+                    isJumping = false;
                 }
-                //ないなら重力を使って落とす
-                else
+                //veloctityが規定値より下回ったら重力を使って落とす
+                if (jumpKey == 0 || Jumpcnt >= MAX_COUNT)
                 {
                     rb2d.AddForce(new Vector2(rb2d.velocity.x, Physics.gravity.y * gravityRate * 2.5f));
                 }
+                //veloctityが規定値よりも上回っていたら
+                else
+                {
+                    //ジャンプパワーがあるなら二倍の軽減率で減少させ飛ばす
+                    if (0 <= JumpPower)
+                    {
+                        JumpPower -= jumpPowerAttenuation * 3;
+                        rb2d.AddForce(new Vector2(rb2d.velocity.x, JumpPower));
+                    }
+                    //ないなら重力を使って落とす
+                    else
+                    {
+                        rb2d.AddForce(new Vector2(rb2d.velocity.x, Physics.gravity.y * gravityRate * 2.5f));
+                    }
+                }
             }
-        }
 
-        // ジャンプ中
-        if (isJumping)
-        {
-            if (Jumpcnt < MAX_COUNT && jumpKey != 0)
+            // ジャンプ中
+            if (isJumping)
             {
-                Jumpcnt += Time.deltaTime;
-                JumpPower -= jumpPowerAttenuation;
-                rb2d.AddForce(new Vector2(rb2d.velocity.x, JumpPower));
+                if (Jumpcnt < MAX_COUNT && jumpKey != 0)
+                {
+                    Jumpcnt += Time.deltaTime;
+                    JumpPower -= jumpPowerAttenuation;
+                    rb2d.AddForce(new Vector2(rb2d.velocity.x, JumpPower));
+                }
+                //飛べる秒数のカウンターが０になったらジャンプを解除する
+                if (Jumpcnt >= MAX_COUNT)
+                {
+                    isJumping = false;
+                }
+                if (jumpKey == 0)
+                {
+                    isJumping = false;
+                }
+                //同様にvelocity.yが規定値よりも下回ったらジャンプを解除する
+                if (rb2d.velocity.y < -1)
+                {
+                    isJumping = false;
+                }
             }
-            //飛べる秒数のカウンターが０になったらジャンプを解除する
-            if (Jumpcnt >= MAX_COUNT)
+            //ジャンプキーが離されたら飛べるかどうかのフラグをtrueにする
+            if (jumpKey == 0)
             {
-                isJumping = false;
+                isJumpingCheck = true;
+                Jumpcnt = 0;
             }
-            if(jumpKey == 0)
-            {
-                isJumping = false;
-            }
-            //同様にvelocity.yが規定値よりも下回ったらジャンプを解除する
-            if (rb2d.velocity.y < -1)
-            {
-                isJumping = false;
-            }
-        }
-        //ジャンプキーが離されたら飛べるかどうかのフラグをtrueにする
-        if (jumpKey == 0)
-        {
-            isJumpingCheck = true;
-            Jumpcnt = 0;
         }
     }
 }

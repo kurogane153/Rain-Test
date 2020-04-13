@@ -34,13 +34,16 @@ public class FadeScript : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown("triangle") || Input.GetKeyDown(KeyCode.T))
+        if (Player.gameObject.GetComponent<TestJump_ver2>().Debug_F == false)
         {
-            triangle = true;
+            if (Input.GetButtonDown("triangle") || Input.GetKeyDown(KeyCode.T))
+            {
+                triangle = true;
+            }
+            ResPown();
+            PlayerOnRain();
+            Fade();
         }
-        ResPown();
-        PlayerOnRain();
-        Fade();
 
         if (debug)
         {
