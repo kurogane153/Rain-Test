@@ -3,19 +3,20 @@ using System.Collections;
 
 public class Elevator : MonoBehaviour
 {
-
     public float speed, repeat_dist, delay;
     public int moveDirection;
 
     private float radian;
+    private Vector3 defaultPositionBase;
     private Vector3 defaultPosition;
-    private bool isMoveing;
+    private bool isMoving;
+    private bool isMoving2;
 
     private Rigidbody2D rb; // this Rigidbody2D
 
     void Start()
     {
-        defaultPosition = transform.position;
+        defaultPositionBase = defaultPosition = transform.position;
         radian = 0;
 
         if (delay > 0)
@@ -24,7 +25,7 @@ public class Elevator : MonoBehaviour
         }
         else
         {
-            isMoveing = true;
+            isMoving = true;
         }
 
         rb = GetComponent<Rigidbody2D>();
@@ -33,7 +34,7 @@ public class Elevator : MonoBehaviour
 
     void Update()
     {
-        if (isMoveing)
+        if (isMoving)
         {
             switch (moveDirection) // 0:X方向 1:Y方向 2:Z方向
             {
@@ -46,6 +47,18 @@ public class Elevator : MonoBehaviour
                 case 2:
                     transform.position = defaultPosition + new Vector3(0, 0, Mathf.Sin(radian) * repeat_dist);
                     break;
+                case 3:
+                    if (this.transform.position.y < repeat_dist && isMoving2)
+                    {
+                        transform.position = defaultPosition + new Vector3(0, radian, 0);
+                    }
+                    else
+                    {
+                        transform.position = defaultPositionBase;
+                        isMoving2 = false;
+                    }
+                    
+                    break;
             }
             radian += speed * Time.deltaTime;
         }
@@ -54,6 +67,13 @@ public class Elevator : MonoBehaviour
     IEnumerator startDelay(float time)
     {
         yield return new WaitForSeconds(time);
-        isMoveing = true;
+        isMoving = true;
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        isMoving2 = true;
+    }
+
+
 }
