@@ -62,6 +62,7 @@ public class TestJump_ver2 : MonoBehaviour {
     public bool res = false;
 
     public bool Debug_F = false;
+    public bool Fade = false;
 
     Animator _animator;
 
@@ -203,6 +204,10 @@ public class TestJump_ver2 : MonoBehaviour {
         {
             restartPoint = collision.transform.position;
             Destroy(collision.gameObject);
+        }
+        if (collision.tag == "fade")
+        {
+            Fade = true;
         }
     }
 

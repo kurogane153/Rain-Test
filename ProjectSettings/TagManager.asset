@@ -9,6 +9,7 @@ TagManager:
   - test
   - Respaen
   - floor
+  - fade
   layers:
   - Default
   - TransparentFX
