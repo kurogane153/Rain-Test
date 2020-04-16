@@ -31,6 +31,7 @@ GameObject:
   - component: {fileID: 114128005135928102}
   - component: {fileID: 114406801129019834}
   - component: {fileID: 114519763441903674}
+  - component: {fileID: 114207778026954212}
   m_Layer: 8
   m_Name: Rain
   m_TagString: Rain
@@ -144,6 +145,22 @@ MonoBehaviour:
   AreaY1: 160
   AreaY2: 0
   RainRot: -10
+--- !u!114 &114207778026954212
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1815897455353550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e179720351c403c4cadd8fc1e20caa48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AreaX1: 500
+  AreaX2: 600
+  AreaY1: 400
+  AreaY2: 300
+  RainRot: 180
 --- !u!114 &114238171022597530
 MonoBehaviour:
   m_ObjectHideFlags: 1

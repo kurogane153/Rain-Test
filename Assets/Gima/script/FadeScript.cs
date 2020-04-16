@@ -59,7 +59,7 @@ public class FadeScript : MonoBehaviour
         if (fade_F)
         {
             GetComponent<Image>().color = new Color(111111, 111111, 111111, alfa3);
-            alfa3 += 0.02f;
+            alfa3 += 0.005f;
         }
 
         if (debug)
