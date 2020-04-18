@@ -9,6 +9,8 @@ public class FadeScript : MonoBehaviour
     float alfa3 = 0.0f;
     float redin = 0;
     bool fade_F = false;
+
+    [Header("フェードの速さ")]
     [SerializeField, Range(0f, 5f)] private float speed = 0.05f;
 
     [Header("死までの高さ調整")]
@@ -19,11 +21,11 @@ public class FadeScript : MonoBehaviour
     private GameObject Player;
     private bool flg = false;
     private Vector3 p_v;
-    public bool res = false;
-    public bool triangle = false;
+    private bool triangle = false;
     private bool fed = false;
 
     //デバッグ
+    [Header("デバッグモード用(ONならチェック)")]
     public bool debug;
 
     void Start()
@@ -50,6 +52,7 @@ public class FadeScript : MonoBehaviour
             Fade();
         }
 
+        //ホワイトアウト
         if (Player.gameObject.GetComponent<TestJump_ver2>().Fade == true)
         {
             GetComponent<Image>().color = new Color(111111, 111111, 111111, alfa3);
@@ -74,7 +77,8 @@ public class FadeScript : MonoBehaviour
     //地面（乗れるオブジェクトにいるかどうか）
     void PlayerOnRain()
     {
-        if(Player.gameObject.GetComponent<TestJump_ver2>().fix == true)
+        //地面にいるかどうか
+        if(Player.gameObject.GetComponent<TestJump_ver2>().isGrounded == true)
         {
             //地面（オブジェクトに乗っていたらポジションをセーブ）
             p_v = Player.transform.position;

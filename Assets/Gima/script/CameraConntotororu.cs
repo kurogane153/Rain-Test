@@ -10,22 +10,22 @@ public class CameraConntotororu : MonoBehaviour
     //プレイヤーオブジェクト
     private GameObject Player;
     //z軸を調整。正の数ならプレイヤーの前に、負の数ならプレイヤーの後ろに配置する
-    private float zAdjust = -12.0f;
-    private float yAdjust = 5.0f;
+    [Header("Z軸の補正")]
+    [SerializeField, Range(0f, 30f)]    private float zAdjust = -12.0f;
+    [Header("Y軸の補正")]
+    [SerializeField, Range(0f, 30f)]    private float yAdjust = 5.0f;
 
     //X座調整
-    public float X_camera = 0.0f;
-    public float Y_camera = 0.0f;
+    private float Y_camera = 0.0f;
 
     // カメラの移動につかうやつまとめ(Nodake)
     GameObject[] rains;
-    public bool fix; // 雨に触れたかどうか
+    private bool fix; // 雨に触れたかどうか
     private bool fix2 = false;
     private bool flg = false;
     private bool flg2 = false;
-    public bool CameraMoveSwitch = false;
+    private bool CameraMoveSwitch = false;
     private bool fix3d;
-    float PlayerY_Save = 0.0f; // ジャンプする前のプレイヤーの位置
 
     void Start()
     {

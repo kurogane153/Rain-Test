@@ -4,36 +4,37 @@ using UnityEngine;
 
 public class TestJump_ver2 : MonoBehaviour {
 
+    //角度ラインキャスト
+    [SerializeField] private ContactFilter2D filter2D;
+    public LayerMask groundLayer;
+
+    //ラインキャストで地面にいるかどうかの判定に必要なやーつ
+    Vector2 groundedStart;
+    Vector2 groundedEnd;
+    [Header("触らんで。致し方ない理由でpublicにしてます。すいません")]
+    public bool isGrounded = false;
+
     //移動速度
     [Header("移動速度")]
-    public float speed;
+    [SerializeField, Range(0f, 10f)]    private float speed=0.15f;
 
     //ジャンプキー入力
     private int jumpKey = 0;
     private float x;
     private float y;
 
-    //ラインキャストで地面にいるかどうかの判定に必要なやーつ
-    private bool isGrounded = true;
-    Vector2 groundedStart;
-    Vector2 groundedEnd;
+    //private bool isLeftGrounded = true;
+    //Vector2 leftgroundedStart;
+    //Vector2 leftgroundedEnd;
 
-    private bool isLeftGrounded = true;
-    Vector2 leftgroundedStart;
-    Vector2 leftgroundedEnd;
-
-    private bool isRightGrounded = true;
-    Vector2 rightgroundedStart;
-    Vector2 rightgroundedEnd;
-
-    public LayerMask groundLayer;
-    [SerializeField] private ContactFilter2D filter2D;
+    //private bool isRightGrounded = true;
+    //Vector2 rightgroundedStart;
+    //Vector2 rightgroundedEnd;
 
     //自身のRigidbody
     Rigidbody2D rb2d;
 
     //ジャンプに必要なもの
-    private float JumpTimeCounter;
     private bool isJumpingCheck = true;
     private bool isJumping = false;
     private float JumpPower;
@@ -45,30 +46,29 @@ public class TestJump_ver2 : MonoBehaviour {
     [SerializeField, Range(0f, 10f)]
     private float jumpPowerAttenuation = 0.5f;
 
-    private float vo = 9;
-    private float HORIZONTAL_Y = 0;
-
-    private float JumpSpeed = 39;
+    [Header("ジャンプの高さ")]
+    [SerializeField, Range(0f, 50f)]    private float JumpSpeed = 39;
 
     //タメジャンプ
-    public float Jumpcnt = 0;
+    private float Jumpcnt = 0;
     private const float MAX_COUNT = 0.5f;
-    public float Jumpcnt_2 = 0;
 
+    [Header("現在設定されているリスポーンポイント")]
     public Vector3 restartPoint;
 
+    [Header("何かしらの２Dオブジェクトに当たった時の判定")]
     public bool fix = false;
-    private GameObject Res;
-    public bool res = false;
 
+    [Header("デバッグモードがOnかOffか")]
     public bool Debug_F = false;
+
+    [Header("ホワイトアウト用")]
     public bool Fade = false;
 
     Animator _animator;
 
     void Start()
     {
-        Res = GameObject.Find("Fade");
         rb2d = GetComponent<Rigidbody2D>();
         restartPoint = this.transform.position;
         _animator = GetComponent<Animator>();
@@ -99,8 +99,8 @@ public class TestJump_ver2 : MonoBehaviour {
             DebugMove();
             //デバッグ用
             Debug.DrawLine(groundedStart, groundedEnd, Color.red);
-            Debug.DrawLine(leftgroundedStart, leftgroundedEnd, Color.red);
-            Debug.DrawLine(rightgroundedStart, rightgroundedEnd, Color.red);
+            //Debug.DrawLine(leftgroundedStart, leftgroundedEnd, Color.red);
+            //Debug.DrawLine(rightgroundedStart, rightgroundedEnd, Color.red);
         }
     }
 
@@ -111,14 +111,14 @@ public class TestJump_ver2 : MonoBehaviour {
         groundedStart = this.transform.position - this.transform.up * 1.2f;
         groundedEnd = this.transform.position + this.transform.up * 0.1f;
         isGrounded = Physics2D.Linecast(groundedStart, groundedEnd, groundLayer);
-        //左下
-        leftgroundedStart = this.transform.position - this.transform.right * 0.5f - this.transform.up * 1.2f;
-        leftgroundedEnd = this.transform.position + this.transform.up * 0.5f;
-        isLeftGrounded = Physics2D.Linecast(leftgroundedStart, leftgroundedEnd, groundLayer);
-        //右下
-        rightgroundedStart = this.transform.position - this.transform.right * -0.5f - this.transform.up * 1.2f;
-        rightgroundedEnd = this.transform.position + this.transform.up * 0.5f;
-        isRightGrounded = Physics2D.Linecast(rightgroundedStart, rightgroundedEnd, groundLayer);
+        ////左下
+        //leftgroundedStart = this.transform.position - this.transform.right * 0.5f - this.transform.up * 1.2f;
+        //leftgroundedEnd = this.transform.position + this.transform.up * 0.5f;
+        //isLeftGrounded = Physics2D.Linecast(leftgroundedStart, leftgroundedEnd, groundLayer);
+        ////右下
+        //rightgroundedStart = this.transform.position - this.transform.right * -0.5f - this.transform.up * 1.2f;
+        //rightgroundedEnd = this.transform.position + this.transform.up * 0.5f;
+        //isRightGrounded = Physics2D.Linecast(rightgroundedStart, rightgroundedEnd, groundLayer);
 
         isGrounded = rb2d.IsTouching(filter2D);
     }
@@ -238,7 +238,6 @@ public class TestJump_ver2 : MonoBehaviour {
                 {
                     if (Jumpcnt < MAX_COUNT && jumpKey != 0)
                     {
-                        JumpTimeCounter = 1f;
                         isJumpingCheck = false;
                         isJumping = true;
                         JumpPower = JumpSpeed;

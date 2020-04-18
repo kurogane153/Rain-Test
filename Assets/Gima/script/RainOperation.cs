@@ -5,7 +5,9 @@ using UnityEngine;
 public class RainOperation : MonoBehaviour {
 
     SpriteRenderer MainSpriteRenderer;
+    [Header("雨の速さ")]
     [SerializeField, Range(0,20f)] private float speed = 0.5f;
+    [Header("当たり判定")]
     public bool fix = false;
     public Sprite mainsprite;
     public Sprite sabsprite;

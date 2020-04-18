@@ -10,16 +10,21 @@ public class RainController : MonoBehaviour
     private GameObject Player;
     //経過時間
     private float time = 0f;
-    //雨生成時間間隔
-    public float interval;
-    //X座標の最小値
-    public float xMinPosition = -10f;
-    //X座標の最大値
-    public float xMaxPosition = 10f;
-    //Y座標の最小値
-    public float yMinPosition = 5f;
-    //Y座標の最大値
-    public float yMaxPosition = 10f;
+
+    [Header("雨の生成間隔")]
+    [SerializeField, Range(0, 20f)] private float interval = 0.5f;
+
+    [Header("X座標の最小値")]
+    [SerializeField, Range(-50, 0)] private float xMinPosition = -17f;
+
+    [Header("X座標の最大値")]
+    [SerializeField, Range(0, 50)] private float xMaxPosition = 20f;
+
+    [Header("Y座標の最小値")]
+    [SerializeField, Range(-20, 50)] private float yMinPosition = 18f;
+
+    [Header("Y座標の最大値")]
+    [SerializeField, Range(-20, 50)] public float yMaxPosition = 17f;
 
     void Start()
     {
