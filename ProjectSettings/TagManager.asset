@@ -10,7 +10,11 @@ TagManager:
   - Respaen
   - floor
   - fade
+<<<<<<< HEAD
+  - sepia_part
+=======
   - Seen
+>>>>>>> master
   layers:
   - Default
   - TransparentFX

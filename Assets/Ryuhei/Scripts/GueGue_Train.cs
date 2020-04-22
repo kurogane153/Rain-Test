@@ -9,13 +9,15 @@ public class GueGue_Train : MonoBehaviour
     private Vector3 defaultPosition;
     private bool StartSwitch;
 
+    private GameObject Player;
+
     //private Rigidbody2D rb; // this Rigidbody2D
 
     void Start()
     {
-        
-        
-       
+
+
+        Player = GameObject.Find("Player");
 
         //rb = GetComponent<Rigidbody2D>();
         //rb.bodyType = RigidbodyType2D.Static;
@@ -45,5 +47,17 @@ public class GueGue_Train : MonoBehaviour
             StartSwitch = true;
             Debug.Log("GueGue");
         }
+    }
+
+    // 乗っている間プレイヤーをthisの子要素にする
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        Player.transform.parent = this.transform;
+    }
+
+    // 降りたら子要素解除
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        Player.transform.parent = null;
     }
 }
