@@ -10,6 +10,7 @@ TagManager:
   - Respaen
   - floor
   - fade
+  - Seen
   layers:
   - Default
   - TransparentFX

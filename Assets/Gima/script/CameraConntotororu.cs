@@ -9,6 +9,7 @@ public class CameraConntotororu : MonoBehaviour
     public GameObject mainCamera;
     //プレイヤーオブジェクト
     private GameObject Player;
+    private GameObject feda;
     //z軸を調整。正の数ならプレイヤーの前に、負の数ならプレイヤーの後ろに配置する
     [Header("Z軸の補正")]
     [SerializeField, Range(0f, 30f)]    private float zAdjust = -12.0f;
@@ -20,23 +21,27 @@ public class CameraConntotororu : MonoBehaviour
 
     // カメラの移動につかうやつまとめ(Nodake)
     GameObject[] rains;
+    private Vector3 pos_p;
     private bool fix; // 雨に触れたかどうか
     private bool fix2 = false;
-    private bool flg = false;
-    private bool flg2 = false;
     private bool CameraMoveSwitch = false;
     private bool fix3d;
+    private bool tri = false;
 
     void Start()
     {
         Player = GameObject.Find("Player");
         mainCamera = GameObject.Find("Main Camera");
+        feda = GameObject.Find("Fade");
     }
 
     void Update()
     {
 
         fix = false;
+
+        pos_p = Player.gameObject.GetComponent<TestJump_ver2>().restartPoint;
+
         if (Player.gameObject.GetComponent<TestJump_ver2>().Debug_F == false)
         {
             PlayerOnGrand(); // プレイヤーが地面に立っているかどうか
@@ -51,8 +56,17 @@ public class CameraConntotororu : MonoBehaviour
 
     void FixedUpdate()
     {
-        CameraMoveOnRain(); // カメラがプレイヤーに乗ったときのうごき
-        if (!fix2)
+        if (Input.GetButtonDown("triangle") || Input.GetKeyDown(KeyCode.T) ||
+            feda.gameObject.GetComponent<FadeScript>().fed == true)
+        {
+            pos_p.z = zAdjust;
+            mainCamera.transform.position = pos_p;
+            tri = true;
+        }
+
+        CameraMoveOnRain(); // カメラが雨粒に乗ったときのうごき
+
+        if (!fix2 && !tri)
         {
             mainCamera.transform.position = new Vector3(Player.transform.position.x,
                Y_camera, zAdjust);
@@ -64,9 +78,8 @@ public class CameraConntotororu : MonoBehaviour
     {
         if (Player.transform.position.y <= -3.60f)
         {
-            //fix = true;
             fix2 = false;
-            if (Player.transform.position.y <= mainCamera.transform.position.y && !flg2)
+            if (Player.transform.position.y <= mainCamera.transform.position.y)
             {
                 Y_camera = Player.transform.position.y + yAdjust;
             }
@@ -101,6 +114,7 @@ public class CameraConntotororu : MonoBehaviour
                 fix = true;
             }
         }
+
     }
     // カメラが雨粒に乗ったとき、移動する
     void CameraMoveOnRain()
@@ -110,7 +124,9 @@ public class CameraConntotororu : MonoBehaviour
         {
             CameraMoveSwitch = true; // カメラを移動する
             fix2 = true;
+            tri = false;
         }
+
         // カメラを動かすスイッチがオンのとき
         if (CameraMoveSwitch == true)
         {

@@ -19,10 +19,11 @@ public class FadeScript : MonoBehaviour
     float red, green, blue;
     Color color;
     private GameObject Player;
+    private GameObject Main_camera;
     private bool flg = false;
     private Vector3 p_v;
     private bool triangle = false;
-    private bool fed = false;
+    public bool fed = false;
 
     //デバッグ
     [Header("デバッグモード用(ONならチェック)")]
@@ -35,6 +36,7 @@ public class FadeScript : MonoBehaviour
         green = GetComponent<Image>().color.g;
         blue = GetComponent<Image>().color.b;
         Player = GameObject.Find("Player");
+        Main_camera = GameObject.Find("Main Camera");
     }
 
     void Update()
@@ -108,7 +110,8 @@ public class FadeScript : MonoBehaviour
             if (alfa2 > 1.0f)
             {
                 triangle = false;
-                Player.transform.position = Player.gameObject.GetComponent<TestJump_ver2>().restartPoint;
+                Player.transform.position = 
+                    Player.gameObject.GetComponent<TestJump_ver2>().restartPoint;
             }
         } 
         //フラグがOff
@@ -135,12 +138,13 @@ public class FadeScript : MonoBehaviour
             {
                 GetComponent<Image>().color = new Color(red, green, blue, alfa);
                 alfa += speed;
-                fed = true;
             }
             if (alfa > 1.0f)
             {
                 //リスポーン地点にリスポーンさせる
-                Player.transform.position = Player.gameObject.GetComponent<TestJump_ver2>().restartPoint;
+                Player.transform.position = 
+                    Player.gameObject.GetComponent<TestJump_ver2>().restartPoint;
+                fed = true;
                 flg = false;
             }
         }else if (!flg)
@@ -153,6 +157,7 @@ public class FadeScript : MonoBehaviour
                     //フェードイン
                     GetComponent<Image>().color = new Color(red, green, blue, alfa);
                     alfa -= speed;
+                    fed = false;
                 }
                 else if (alfa < 0)
                 {

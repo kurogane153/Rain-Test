@@ -66,12 +66,15 @@ public class TestJump_ver2 : MonoBehaviour {
     public bool Fade = false;
 
     Animator _animator;
+    public AudioClip sound1;
+    AudioSource audioSource;
 
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
         restartPoint = this.transform.position;
         _animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -194,6 +197,7 @@ public class TestJump_ver2 : MonoBehaviour {
         {
             x = Input.GetAxis("Horizontal");
             y = Input.GetAxis("Vertical");
+            audioSource.PlayOneShot(sound1);
             gameObject.transform.position += new Vector3(x * speed, y * speed);
         }
     }
