@@ -33,7 +33,7 @@ GameObject:
   - component: {fileID: 114519763441903674}
   - component: {fileID: 114207778026954212}
   m_Layer: 8
-  m_Name: Rain
+  m_Name: Rain 3
   m_TagString: Rain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
