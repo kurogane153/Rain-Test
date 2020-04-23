@@ -3,18 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-<<<<<<< HEAD
   tags: []
-=======
-  tags:
-  - Rain
-  - Grand
-  - test
-  - Respaen
-  - floor
-  - fade
-  - sepia_part
->>>>>>> 033bf5e4e07dccb254b38aa0beea8ee36165a328
   layers:
   - Default
   - TransparentFX

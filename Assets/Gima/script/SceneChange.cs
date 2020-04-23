@@ -1,25 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement; //シーン切り替えに使用するライブラリ
+using UnityEngine.UI;
+
 
 public class SceneChange : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
+    public bool fed = false;
+
+    void Start () {
+
+    }
+
 	void Update () {
 
-	}
+    }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player")
         {
-            SceneManager.LoadScene("Last_Gima");
+            fed = true;
         }
     }
 }

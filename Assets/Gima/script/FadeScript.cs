@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement; //シーン切り替えに使用するライブラリ
 
 public class FadeScript : MonoBehaviour
 {
     float alfa;
-    float alfa2 =0.0f;
+    float alfa2 = 0.0f;
     float alfa3 = 0.0f;
+    float alfa4 = 0.0f;
     float redin = 0;
     bool fade_F = false;
 
@@ -18,12 +20,15 @@ public class FadeScript : MonoBehaviour
 
     float red, green, blue;
     Color color;
+
     private GameObject Player;
     private GameObject Main_camera;
+    private GameObject SeenChange;
     private bool flg = false;
     private Vector3 p_v;
     private bool triangle = false;
     public bool fed = false;
+    public bool seen = true;
 
     //デバッグ
     [Header("デバッグモード用(ONならチェック)")]
@@ -35,6 +40,7 @@ public class FadeScript : MonoBehaviour
         red = GetComponent<Image>().color.r;
         green = GetComponent<Image>().color.g;
         blue = GetComponent<Image>().color.b;
+        SeenChange = GameObject.Find("Scene Change");
         Player = GameObject.Find("Player");
         Main_camera = GameObject.Find("Main Camera");
     }
@@ -52,6 +58,10 @@ public class FadeScript : MonoBehaviour
             ResPown();
             PlayerOnRain();
             Fade();
+            if (SeenChange.gameObject.GetComponent<SceneChange>().fed == true)
+            {
+                Seen();
+            }
         }
 
         //ホワイトアウト
@@ -165,6 +175,39 @@ public class FadeScript : MonoBehaviour
                     flg = false;
                     alfa = 0;
                 }
+            }
+        }
+    }
+
+    void Seen()
+    {
+        if (seen)
+        {
+            if (alfa4 <= 1.0f)
+            {
+                GetComponent<Image>().color = new Color(red, green, blue, alfa4);
+                alfa4 += speed;
+            }
+            else if (alfa4 > 1.0f)
+            {
+                SceneManager.LoadScene("Last_Gima");
+                seen = false;
+            }
+        }
+        else if (!seen)
+        {
+            seen = false;
+            //アルファ値が規定値以下なら
+            if (alfa4 >= 0)
+            {
+                //アルファ値を減算・フェードイン
+                GetComponent<Image>().color = new Color(red, green, blue, alfa4);
+                alfa4 -= speed;
+            }
+            if(alfa4 <= 0)
+            {
+                seen = true;
+
             }
         }
     }
