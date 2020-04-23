@@ -24,6 +24,7 @@ public class FadeScript : MonoBehaviour
     private GameObject Player;
     private GameObject Main_camera;
     private GameObject SeenChange;
+    private GameObject SeenChange2;
     private bool flg = false;
     private Vector3 p_v;
     private bool triangle = false;
@@ -41,6 +42,7 @@ public class FadeScript : MonoBehaviour
         green = GetComponent<Image>().color.g;
         blue = GetComponent<Image>().color.b;
         SeenChange = GameObject.Find("Scene Change");
+        SeenChange2 = GameObject.Find("scenechange２");
         Player = GameObject.Find("Player");
         Main_camera = GameObject.Find("Main Camera");
     }
@@ -58,7 +60,8 @@ public class FadeScript : MonoBehaviour
             ResPown();
             PlayerOnRain();
             Fade();
-            if (SeenChange.gameObject.GetComponent<SceneChange>().fed == true)
+            if (SeenChange.gameObject.GetComponent<SceneChange>().fed == true ||
+                SeenChange2.gameObject.GetComponent<scenechange２>().fed2 ==true)
             {
                 Seen();
             }
@@ -190,7 +193,13 @@ public class FadeScript : MonoBehaviour
             }
             else if (alfa4 > 1.0f)
             {
-                SceneManager.LoadScene("Last_Gima");
+                if (SeenChange.gameObject.GetComponent<SceneChange>().fed == true)
+                {
+                    SceneManager.LoadScene("Stage2b");
+                }else
+                {
+                    SceneManager.LoadScene("Last_Gima");
+                }
                 seen = false;
             }
         }

@@ -15,16 +15,16 @@ public class RainController : MonoBehaviour
     [SerializeField, Range(0, 20f)] private float interval = 0.5f;
 
     [Header("X座標の最小値")]
-    [SerializeField, Range(-50, 0)] private float xMinPosition = -17f;
+    [SerializeField, Range(-100, 100)] private float xMinPosition = -17f;
 
     [Header("X座標の最大値")]
-    [SerializeField, Range(0, 50)] private float xMaxPosition = 20f;
+    [SerializeField, Range(0, 100)] private float xMaxPosition = 20f;
 
     [Header("Y座標の最小値")]
-    [SerializeField, Range(-20, 50)] private float yMinPosition = 18f;
+    [SerializeField, Range(-50, 100)] private float yMinPosition = 18f;
 
     [Header("Y座標の最大値")]
-    [SerializeField, Range(-20, 50)] public float yMaxPosition = 17f;
+    [SerializeField, Range(-50, 100)] public float yMaxPosition = 17f;
 
     void Start()
     {
