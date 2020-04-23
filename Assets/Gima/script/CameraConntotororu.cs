@@ -24,7 +24,7 @@ public class CameraConntotororu : MonoBehaviour
     private Vector3 pos_p;
     private bool fix; // 雨に触れたかどうか
     private bool fix2 = false;
-    private bool CameraMoveSwitch = false;
+    public bool CameraMoveSwitch = false;
     private bool fix3d;
     private bool tri = false;
 

@@ -43,14 +43,14 @@ public class CameraSwitching : MonoBehaviour
                 //サブカメラをアクティブに設定
                 //mainCamera.SetActive(false);
                 subCamera.SetActive(true);
-                Debug.Log("sepia");
+                //Debug.Log("sepia");
         }
         else
         {
             //メインカメラをアクティブに設定
             subCamera.SetActive(false);
             //mainCamera.SetActive(true);
-            Debug.Log("Standard");
+            //Debug.Log("Standard");
         }
     }
 }
