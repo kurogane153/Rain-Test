@@ -6624,6 +6624,16 @@ Prefab:
       propertyPath: m_Color.b
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114413737342307826, guid: 71f25ec6772623447a8f30750688e54c,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114413737342307826, guid: 71f25ec6772623447a8f30750688e54c,
+        type: 2}
+      propertyPath: seen
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 71f25ec6772623447a8f30750688e54c, type: 2}
   m_IsPrefabParent: 0
@@ -8481,11 +8491,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4195938675232872, guid: 52da0d68a848c4e42acb008ce233d09b, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -38.7
+      value: -38.6
       objectReference: {fileID: 0}
     - target: {fileID: 4195938675232872, guid: 52da0d68a848c4e42acb008ce233d09b, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -3.8
+      value: -3.5
       objectReference: {fileID: 0}
     - target: {fileID: 4195938675232872, guid: 52da0d68a848c4e42acb008ce233d09b, type: 2}
       propertyPath: m_LocalPosition.z
