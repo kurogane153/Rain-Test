@@ -4,14 +4,15 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class ScreenTransition : MonoBehaviour {
+public class ScreenTransitionMove2 : MonoBehaviour {
 
-    float alfa = 0.0f;
+    float alfa = 1.0f;
     bool flg = false;
+    bool fast = false;
     private Image Img;
     private GameObject image_object;
 
-    float speed =0.05f;
+    float speed = 0.05f;
 
     void Start()
     {
@@ -21,7 +22,16 @@ public class ScreenTransition : MonoBehaviour {
 
     void Update()
     {
-        if (flg)
+        if (alfa >= 0 && !fast)
+        {
+            Img.color = new Color(Img.color.r, Img.color.g, Img.color.b, alfa);
+            alfa -= speed;
+        }
+        else
+        {
+            fast = true;
+        }
+        if (flg && fast)
         {
             if (alfa <= 1.0f)
             {
@@ -30,7 +40,8 @@ public class ScreenTransition : MonoBehaviour {
             }
             else if (alfa > 1.0f)
             {
-                SceneManager.LoadScene("FastMovie");
+                fast = false;
+                SceneManager.LoadScene("Stage2b");
             }
         }
     }
