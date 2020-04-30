@@ -197,7 +197,6 @@ public class TestJump_ver2 : MonoBehaviour {
         {
             x = Input.GetAxis("Horizontal");
             y = Input.GetAxis("Vertical");
-            audioSource.PlayOneShot(sound1);
             gameObject.transform.position += new Vector3(x * speed, y * speed);
         }
     }
