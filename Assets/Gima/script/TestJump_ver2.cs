@@ -19,6 +19,14 @@ public class TestJump_ver2 : MonoBehaviour {
     [SerializeField, Range(0f, 10f)]    private float speed=0.15f;
 
     //ジャンプキー入力
+    //ジャンプの種類   0がY軸ジャンプ  ：　1がX軸ジャンプ
+    struct Jump
+    {
+        public int jumpKey;
+        public int jumpkeyTP;
+    }
+
+    Jump P_jump;
     private int jumpKey = 0;
     private float x;
     private float y;
@@ -152,23 +160,64 @@ public class TestJump_ver2 : MonoBehaviour {
         }
 
         // ジャンプキー取得
-        if (Input.GetButtonDown("X") || Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetButtonDown("X") || Input.GetKeyDown(KeyCode.Space) 
+            || Input.GetButtonDown("O"))
         {
+
             jumpKey = 1;
 
-        }
-        else if (Input.GetButton("X") || Input.GetKey(KeyCode.Space))
-        {
-            jumpKey = 2;
+            if (isGrounded)
+            {
+                if (Input.GetButtonDown("X"))
+                {
+                    P_jump.jumpkeyTP = 0;
+                }
+                else if (Input.GetButtonDown("O"))
+                {
+                    P_jump.jumpkeyTP = 1;
+                }
+            }
 
         }
-        else if (Input.GetButtonUp("X") || Input.GetKeyUp(KeyCode.Space))
+        else if (Input.GetButton("X") || Input.GetKey(KeyCode.Space)
+            || Input.GetButton("O"))
+        {
+
+            jumpKey = 2;
+            if (isGrounded)
+            {
+                if (Input.GetButton("X"))
+                {
+                    P_jump.jumpkeyTP = 0;
+                }
+                else if (Input.GetButton("O"))
+                {
+                    P_jump.jumpkeyTP = 1;
+                }
+            }
+
+        }
+        else if (Input.GetButtonUp("X") || Input.GetKeyUp(KeyCode.Space) 
+            || Input.GetButtonUp("O"))
         {
 
             jumpKey = 0;
+
+            if (isGrounded)
+            {
+                if (Input.GetButtonUp("X"))
+                {
+                    P_jump.jumpkeyTP = 0;
+                }
+                else if (Input.GetButtonUp("O"))
+                {
+                    P_jump.jumpkeyTP = 1;
+                }
+            }
         }
     }
 
+    //デバッグモードの移動処理
     void DebugMove()
     {
         bool keyflg=false;
@@ -201,6 +250,7 @@ public class TestJump_ver2 : MonoBehaviour {
         }
     }
 
+    //2D当たり判定(すり抜け)
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Respaen")
@@ -214,23 +264,45 @@ public class TestJump_ver2 : MonoBehaviour {
         }
     }
 
+    //2D当たり判定
     void OnCollisionEnter2D(Collision2D collision)
     {
         fix = true;   
     }
 
+    //2D当たり判定（離れたら）
     void OnCollisionExit2D(Collision2D collision)
     {
         fix = false;
     }
 
+    //Unity内の指定回数毎秒回す
     void FixedUpdate()
     {
         if (!Debug_F)
         {
             _animator.SetBool("Jump", false);
             x = Input.GetAxis("Horizontal");
-            gameObject.transform.position += new Vector3(x * speed, 0);
+            if (!isGrounded)
+            {
+                if (P_jump.jumpkeyTP == 0)
+                {
+                    gameObject.transform.position += new Vector3(x * (speed / 2.0f), 0);
+
+                }
+                else if (P_jump.jumpkeyTP == 1)
+                {
+
+                    gameObject.transform.position += new Vector3(x * speed, 0);
+
+                }
+            }
+            else if (isGrounded)
+            {
+
+                gameObject.transform.position += new Vector3(x * speed, 0);
+
+            }
 
             //地面にいるとき
             if (isGrounded)
@@ -243,7 +315,15 @@ public class TestJump_ver2 : MonoBehaviour {
                     {
                         isJumpingCheck = false;
                         isJumping = true;
-                        JumpPower = JumpSpeed;
+                        if(P_jump.jumpkeyTP == 0)
+                        {
+                            JumpPower = JumpSpeed * 1.15f;
+
+                        }else if(P_jump.jumpkeyTP == 1){
+
+                            JumpPower = JumpSpeed;
+
+                        }
                         rb2d.AddForce(new Vector2(rb2d.velocity.x, JumpPower));
                     }
                 }
