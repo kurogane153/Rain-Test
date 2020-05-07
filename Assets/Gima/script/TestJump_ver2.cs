@@ -19,6 +19,14 @@ public class TestJump_ver2 : MonoBehaviour {
     [SerializeField, Range(0f, 10f)]    private float speed=0.15f;
 
     //ジャンプキー入力
+    //ジャンプの種類   0がY軸ジャンプ  ：　1がX軸ジャンプ
+    struct Jump
+    {
+        public int jumpKey;
+        public int jumpkeyTP;
+    }
+
+    Jump P_jump;
     private int jumpKey = 0;
     private float x;
     private float y;
@@ -68,6 +76,13 @@ public class TestJump_ver2 : MonoBehaviour {
     Animator _animator;
     public AudioClip sound1;
     AudioSource audioSource;
+    private GameObject Parasol;
+    private bool Parasol_flg = true;
+    private GameObject DebugRes;
+
+    [Header("パラソルを出す位置　+だとジャンプ中に　－だと落下中に")]
+    [SerializeField, Range(0f, 10f)]
+    private float parasol_line = 1.0f;
 
     void Start()
     {
@@ -75,6 +90,8 @@ public class TestJump_ver2 : MonoBehaviour {
         restartPoint = this.transform.position;
         _animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
+        Parasol = GameObject.Find("Parasol");
+        DebugRes = GameObject.Find("DebugRes");
     }
 
     void Update()
@@ -152,23 +169,86 @@ public class TestJump_ver2 : MonoBehaviour {
         }
 
         // ジャンプキー取得
-        if (Input.GetButtonDown("X") || Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetButtonDown("X") || Input.GetKeyDown(KeyCode.Space) 
+            || Input.GetButtonDown("O"))
         {
+
             jumpKey = 1;
 
-        }
-        else if (Input.GetButton("X") || Input.GetKey(KeyCode.Space))
-        {
-            jumpKey = 2;
+            if (isGrounded)
+            {
+                if (Input.GetButtonDown("X"))
+                {
+                    P_jump.jumpkeyTP = 0;
+                }
+                else if (Input.GetButtonDown("O"))
+                {
+                    P_jump.jumpkeyTP = 1;
+                }
+            }
 
         }
-        else if (Input.GetButtonUp("X") || Input.GetKeyUp(KeyCode.Space))
+        else if (Input.GetButton("X") || Input.GetKey(KeyCode.Space)
+            || Input.GetButton("O"))
+        {
+
+            jumpKey = 2;
+            if (isGrounded)
+            {
+                if (Input.GetButton("X"))
+                {
+                    P_jump.jumpkeyTP = 0;
+                }
+                else if (Input.GetButton("O"))
+                {
+                    P_jump.jumpkeyTP = 1;
+                }
+            }
+
+        }
+        else if (Input.GetButtonUp("X") || Input.GetKeyUp(KeyCode.Space) 
+            || Input.GetButtonUp("O"))
         {
 
             jumpKey = 0;
+
+            if (isGrounded)
+            {
+                if (Input.GetButtonUp("X"))
+                {
+                    P_jump.jumpkeyTP = 0;
+                }
+                else if (Input.GetButtonUp("O"))
+                {
+                    P_jump.jumpkeyTP = 1;
+                }
+            }
+        }
+
+        //パラソルの入力判定
+        if (!isGrounded)
+        {
+            if (Input.GetButtonDown("R1") && rb2d.velocity.y < parasol_line)
+            {
+                if (!Parasol_flg)
+                {
+                    Parasol.gameObject.SetActive(true);
+                    Parasol_flg = true;
+                }else if (Parasol_flg)
+                {
+                    Parasol.gameObject.SetActive(false);
+                    Parasol_flg = false;
+                }
+            }
+        }
+        if (isGrounded)
+        {
+            Parasol.gameObject.SetActive(false);
+            Parasol_flg = false;
         }
     }
 
+    //デバッグモードの移動処理
     void DebugMove()
     {
         bool keyflg=false;
@@ -197,11 +277,15 @@ public class TestJump_ver2 : MonoBehaviour {
         {
             x = Input.GetAxis("Horizontal");
             y = Input.GetAxis("Vertical");
-            audioSource.PlayOneShot(sound1);
             gameObject.transform.position += new Vector3(x * speed, y * speed);
+        }
+        if (Input.GetButton("triangle"))
+        {
+            this.transform.position = DebugRes.transform.position;
         }
     }
 
+    //2D当たり判定(すり抜け)
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Respaen")
@@ -215,23 +299,45 @@ public class TestJump_ver2 : MonoBehaviour {
         }
     }
 
+    //2D当たり判定
     void OnCollisionEnter2D(Collision2D collision)
     {
         fix = true;   
     }
 
+    //2D当たり判定（離れたら）
     void OnCollisionExit2D(Collision2D collision)
     {
         fix = false;
     }
 
+    //Unity内の指定回数毎秒回す
     void FixedUpdate()
     {
         if (!Debug_F)
         {
             _animator.SetBool("Jump", false);
             x = Input.GetAxis("Horizontal");
-            gameObject.transform.position += new Vector3(x * speed, 0);
+            if (!isGrounded)
+            {
+                if (P_jump.jumpkeyTP == 0)
+                {
+                    gameObject.transform.position += new Vector3(x * (speed / 2.0f), 0);
+
+                }
+                else if (P_jump.jumpkeyTP == 1)
+                {
+
+                    gameObject.transform.position += new Vector3(x * speed, 0);
+
+                }
+            }
+            else if (isGrounded)
+            {
+
+                gameObject.transform.position += new Vector3(x * speed, 0);
+
+            }
 
             //地面にいるとき
             if (isGrounded)
@@ -244,7 +350,15 @@ public class TestJump_ver2 : MonoBehaviour {
                     {
                         isJumpingCheck = false;
                         isJumping = true;
-                        JumpPower = JumpSpeed;
+                        if(P_jump.jumpkeyTP == 0)
+                        {
+                            JumpPower = JumpSpeed * 1.15f;
+
+                        }else if(P_jump.jumpkeyTP == 1){
+
+                            JumpPower = JumpSpeed;
+
+                        }
                         rb2d.AddForce(new Vector2(rb2d.velocity.x, JumpPower));
                     }
                 }
@@ -261,7 +375,13 @@ public class TestJump_ver2 : MonoBehaviour {
                 //veloctityが規定値より下回ったら重力を使って落とす
                 if (jumpKey == 0 || Jumpcnt >= MAX_COUNT)
                 {
-                    rb2d.AddForce(new Vector2(rb2d.velocity.x, Physics.gravity.y * gravityRate * 2.5f));
+                    if (Parasol_flg)
+                    {
+                        rb2d.AddForce(new Vector2(rb2d.velocity.x, Physics.gravity.y * gravityRate * 1.0f));
+                    }else if (!Parasol_flg)
+                    {
+                        rb2d.AddForce(new Vector2(rb2d.velocity.x, Physics.gravity.y * gravityRate * 2.5f));
+                    }
                 }
                 //veloctityが規定値よりも上回っていたら
                 else
@@ -275,7 +395,14 @@ public class TestJump_ver2 : MonoBehaviour {
                     //ないなら重力を使って落とす
                     else
                     {
-                        rb2d.AddForce(new Vector2(rb2d.velocity.x, Physics.gravity.y * gravityRate * 2.5f));
+                        if (Parasol_flg)
+                        {
+                            rb2d.AddForce(new Vector2(rb2d.velocity.x, Physics.gravity.y * gravityRate * 0.0f));
+                        }
+                        else if (!Parasol_flg)
+                        {
+                            rb2d.AddForce(new Vector2(rb2d.velocity.x, Physics.gravity.y * gravityRate * 2.5f));
+                        }
                     }
                 }
             }

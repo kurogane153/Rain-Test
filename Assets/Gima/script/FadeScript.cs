@@ -77,7 +77,14 @@ public class FadeScript : MonoBehaviour
         if (fade_F)
         {
             GetComponent<Image>().color = new Color(111111, 111111, 111111, alfa3);
-            alfa3 += 0.005f;
+            alfa3 += 0.02f;
+            //LastMovie
+
+            if(alfa3 > 1.0f)
+            {
+                fade_F = false;
+                SceneManager.LoadScene("LastMovie");
+            }
         }
 
         if (debug)
@@ -195,10 +202,10 @@ public class FadeScript : MonoBehaviour
             {
                 if (SeenChange.gameObject.GetComponent<SceneChange>().fed == true)
                 {
-                    SceneManager.LoadScene("Stage2b");
+                    SceneManager.LoadScene("SecondMovie");
                 }else
                 {
-                    SceneManager.LoadScene("Last_Gima");
+                    SceneManager.LoadScene("ThirdMovie");
                 }
                 seen = false;
             }
