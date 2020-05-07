@@ -76,6 +76,13 @@ public class TestJump_ver2 : MonoBehaviour {
     Animator _animator;
     public AudioClip sound1;
     AudioSource audioSource;
+    private GameObject Parasol;
+    private bool Parasol_flg = true;
+    private GameObject DebugRes;
+
+    [Header("パラソルを出す位置　+だとジャンプ中に　－だと落下中に")]
+    [SerializeField, Range(0f, 10f)]
+    private float parasol_line = 1.0f;
 
     void Start()
     {
@@ -83,6 +90,8 @@ public class TestJump_ver2 : MonoBehaviour {
         restartPoint = this.transform.position;
         _animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
+        Parasol = GameObject.Find("Parasol");
+        DebugRes = GameObject.Find("DebugRes");
     }
 
     void Update()
@@ -215,6 +224,28 @@ public class TestJump_ver2 : MonoBehaviour {
                 }
             }
         }
+
+        //パラソルの入力判定
+        if (!isGrounded)
+        {
+            if (Input.GetButtonDown("R1") && rb2d.velocity.y < parasol_line)
+            {
+                if (!Parasol_flg)
+                {
+                    Parasol.gameObject.SetActive(true);
+                    Parasol_flg = true;
+                }else if (Parasol_flg)
+                {
+                    Parasol.gameObject.SetActive(false);
+                    Parasol_flg = false;
+                }
+            }
+        }
+        if (isGrounded)
+        {
+            Parasol.gameObject.SetActive(false);
+            Parasol_flg = false;
+        }
     }
 
     //デバッグモードの移動処理
@@ -247,6 +278,10 @@ public class TestJump_ver2 : MonoBehaviour {
             x = Input.GetAxis("Horizontal");
             y = Input.GetAxis("Vertical");
             gameObject.transform.position += new Vector3(x * speed, y * speed);
+        }
+        if (Input.GetButton("triangle"))
+        {
+            this.transform.position = DebugRes.transform.position;
         }
     }
 
@@ -340,7 +375,13 @@ public class TestJump_ver2 : MonoBehaviour {
                 //veloctityが規定値より下回ったら重力を使って落とす
                 if (jumpKey == 0 || Jumpcnt >= MAX_COUNT)
                 {
-                    rb2d.AddForce(new Vector2(rb2d.velocity.x, Physics.gravity.y * gravityRate * 2.5f));
+                    if (Parasol_flg)
+                    {
+                        rb2d.AddForce(new Vector2(rb2d.velocity.x, Physics.gravity.y * gravityRate * 1.0f));
+                    }else if (!Parasol_flg)
+                    {
+                        rb2d.AddForce(new Vector2(rb2d.velocity.x, Physics.gravity.y * gravityRate * 2.5f));
+                    }
                 }
                 //veloctityが規定値よりも上回っていたら
                 else
@@ -354,7 +395,14 @@ public class TestJump_ver2 : MonoBehaviour {
                     //ないなら重力を使って落とす
                     else
                     {
-                        rb2d.AddForce(new Vector2(rb2d.velocity.x, Physics.gravity.y * gravityRate * 2.5f));
+                        if (Parasol_flg)
+                        {
+                            rb2d.AddForce(new Vector2(rb2d.velocity.x, Physics.gravity.y * gravityRate * 0.0f));
+                        }
+                        else if (!Parasol_flg)
+                        {
+                            rb2d.AddForce(new Vector2(rb2d.velocity.x, Physics.gravity.y * gravityRate * 2.5f));
+                        }
                     }
                 }
             }
