@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 50350146602833854}
   - component: {fileID: 114478566100776974}
   - component: {fileID: 114688666120583868}
+  - component: {fileID: 114469766625234340}
   m_Layer: 8
   m_Name: Rain 2
   m_TagString: Rain
@@ -89,6 +90,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.8086467, y: 1.790608}
   m_EdgeRadius: 0
+--- !u!114 &114469766625234340
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1815897455353550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e179720351c403c4cadd8fc1e20caa48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AreaX1: 350
+  AreaX2: 520
+  AreaY1: 999
+  AreaY2: 0
+  RainRot: 180
 --- !u!114 &114478566100776974
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -110,13 +127,13 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1815897455353550}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e179720351c403c4cadd8fc1e20caa48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AreaX1: 79
-  AreaX2: 123
+  AreaX1: 300
+  AreaX2: 360
   AreaY1: 999
   AreaY2: 0
   RainRot: 180
