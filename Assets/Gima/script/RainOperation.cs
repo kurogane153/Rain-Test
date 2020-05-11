@@ -11,6 +11,7 @@ public class RainOperation : MonoBehaviour {
     public bool fix = false;
     public Sprite mainsprite;
     public Sprite sabsprite;
+    public GameObject particleObject;
     GameObject TW; // The_World_Itemオブジェクト
 
     void Start()
@@ -40,6 +41,10 @@ public class RainOperation : MonoBehaviour {
     void OnCollisionEnter2D(Collision2D collision)
     {
         fix = true;
+        Vector3 pos;
+        pos = this.transform.position;
+        pos.y = this.transform.position.y + 0.5f;
+        Instantiate(particleObject, pos, Quaternion.identity);
         MainSpriteRenderer.sprite = sabsprite;
     }
 

@@ -5773,7 +5773,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ffdb05130c204c4a95d23053f3c4834, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCamera: {fileID: 0}
+  mainCamera: {fileID: 672079709}
   zAdjust: -12
   yAdjust: 5
   CameraMoveSwitch: 0
@@ -5816,6 +5816,8 @@ MonoBehaviour:
   Debug_F: 0
   Fade: 0
   sound1: {fileID: 0}
+  Rainfix: 0
+  parasol_line: 1
 --- !u!212 &1446831353
 SpriteRenderer:
   m_ObjectHideFlags: 0
