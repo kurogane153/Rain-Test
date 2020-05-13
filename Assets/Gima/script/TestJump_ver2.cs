@@ -79,6 +79,7 @@ public class TestJump_ver2 : MonoBehaviour {
     private GameObject Parasol;
     private bool Parasol_flg = true;
     private GameObject DebugRes;
+    public bool Rainfix = false;
 
     [Header("パラソルを出す位置　+だとジャンプ中に　－だと落下中に")]
     [SerializeField, Range(0f, 10f)]
@@ -302,13 +303,18 @@ public class TestJump_ver2 : MonoBehaviour {
     //2D当たり判定
     void OnCollisionEnter2D(Collision2D collision)
     {
-        fix = true;   
+        fix = true;
+        if(collision.gameObject.tag == "Rain")
+        {
+            Rainfix = true;
+        }
     }
 
     //2D当たり判定（離れたら）
     void OnCollisionExit2D(Collision2D collision)
     {
         fix = false;
+        Rainfix = false;
     }
 
     //Unity内の指定回数毎秒回す
@@ -377,7 +383,7 @@ public class TestJump_ver2 : MonoBehaviour {
                 {
                     if (Parasol_flg)
                     {
-                        rb2d.AddForce(new Vector2(rb2d.velocity.x, Physics.gravity.y * gravityRate * 1.0f));
+                        rb2d.AddForce(new Vector2(rb2d.velocity.x, Physics.gravity.y * (gravityRate - 0.2f)));
                     }else if (!Parasol_flg)
                     {
                         rb2d.AddForce(new Vector2(rb2d.velocity.x, Physics.gravity.y * gravityRate * 2.5f));
@@ -397,7 +403,7 @@ public class TestJump_ver2 : MonoBehaviour {
                     {
                         if (Parasol_flg)
                         {
-                            rb2d.AddForce(new Vector2(rb2d.velocity.x, Physics.gravity.y * gravityRate * 0.0f));
+                            rb2d.AddForce(new Vector2(rb2d.velocity.x, Physics.gravity.y * gravityRate));
                         }
                         else if (!Parasol_flg)
                         {

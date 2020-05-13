@@ -16,7 +16,7 @@ public class Audio2 : MonoBehaviour {
     void Update()
     {
 
-        if (Input.GetButtonDown("X"))
+        if (Input.GetButtonDown("X")||Input.GetButtonDown("O"))
         {
             audioSource.PlayOneShot(sound1);
         }
