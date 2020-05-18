@@ -3,16 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
 public class SceneChange : MonoBehaviour {
 
     public bool fed = false;
+    public AudioClip sound1;
+    AudioSource audioSource;
 
-    void Start () {
-
+    void Start()
+    { 
+        audioSource = GetComponent<AudioSource>();
     }
 
-	void Update () {
+	void Update ()
+    {
+        if (fed)
+        {
+            audioSource.PlayOneShot(sound1);
+        }
 
     }
 

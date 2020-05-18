@@ -6,12 +6,12 @@ public class TestJump_ver2 : MonoBehaviour {
 
     //角度ラインキャスト
     [SerializeField] private ContactFilter2D filter2D;
-    public LayerMask groundLayer;
 
     //ラインキャストで地面にいるかどうかの判定に必要なやーつ
+    public LayerMask groundLayer;
     Vector2 groundedStart;
     Vector2 groundedEnd;
-    [Header("触らんで。致し方ない理由でpublicにしてます。すいません")]
+    [Header("地面の当たり判定")]
     public bool isGrounded = false;
 
     //移動速度
@@ -20,24 +20,10 @@ public class TestJump_ver2 : MonoBehaviour {
 
     //ジャンプキー入力
     //ジャンプの種類   0がY軸ジャンプ  ：　1がX軸ジャンプ
-    struct Jump
-    {
-        public int jumpKey;
-        public int jumpkeyTP;
-    }
 
-    Jump P_jump;
     private int jumpKey = 0;
     private float x;
     private float y;
-
-    //private bool isLeftGrounded = true;
-    //Vector2 leftgroundedStart;
-    //Vector2 leftgroundedEnd;
-
-    //private bool isRightGrounded = true;
-    //Vector2 rightgroundedStart;
-    //Vector2 rightgroundedEnd;
 
     //自身のRigidbody
     Rigidbody2D rb2d;
@@ -46,6 +32,8 @@ public class TestJump_ver2 : MonoBehaviour {
     private bool isJumpingCheck = true;
     private bool isJumping = false;
     private float JumpPower;
+    //乗った雨の種類　0なら通常 1なら高いジャンプ
+    private int Raintype = 0;
 
     [Header("落下重力")]
     [SerializeField, Range(0f, 10f)]    private float gravityRate = 1.5f;
@@ -57,8 +45,9 @@ public class TestJump_ver2 : MonoBehaviour {
     [Header("ジャンプの高さ")]
     [SerializeField, Range(0f, 50f)]    private float JumpSpeed = 39;
 
-    //タメジャンプ
+    //ジャンプの許容値（Time）
     private float Jumpcnt = 0;
+    //フルで飛べる秒数  Jumpcnt < MAX_COUNTなら飛べる
     private const float MAX_COUNT = 0.5f;
 
     [Header("現在設定されているリスポーンポイント")]
@@ -79,11 +68,13 @@ public class TestJump_ver2 : MonoBehaviour {
     private GameObject Parasol;
     private bool Parasol_flg = true;
     private GameObject DebugRes;
-    public bool Rainfix = false;
+    //public bool Rainfix = false;
 
-    [Header("パラソルを出す位置　+だとジャンプ中に　－だと落下中に")]
-    [SerializeField, Range(0f, 10f)]
-    private float parasol_line = 1.0f;
+    [Header("パラソルを出した時の上昇補正用　rb2d.velocity.y <= parasol_line")]
+    [SerializeField, Range(0f, 10f)] private float parasol_line = 5.0f;
+
+    [Header("赤い雨に乗った時のジャンプ力　数値が大きいほど高く飛べる")]
+    [SerializeField, Range(0f, 10f)] private float Rain_Red = 5.0f;
 
     void Start()
     {
@@ -97,6 +88,7 @@ public class TestJump_ver2 : MonoBehaviour {
 
     void Update()
     {
+        //デバッグモードがONになっているか
         if ((Input.GetButtonDown("Debug") || 
             Input.GetKeyDown(KeyCode.Backspace)) && Debug_F == false)
         {
@@ -109,10 +101,12 @@ public class TestJump_ver2 : MonoBehaviour {
             Debug_F = false;
         }
 
+        //デバッグモードがOFFなら
         if (!Debug_F)
         {
+            //地面判定
             GroundEnter();
-
+            //キー入力
             InputKey();
         }
         else
@@ -120,8 +114,6 @@ public class TestJump_ver2 : MonoBehaviour {
             DebugMove();
             //デバッグ用
             Debug.DrawLine(groundedStart, groundedEnd, Color.red);
-            //Debug.DrawLine(leftgroundedStart, leftgroundedEnd, Color.red);
-            //Debug.DrawLine(rightgroundedStart, rightgroundedEnd, Color.red);
         }
     }
 
@@ -132,15 +124,6 @@ public class TestJump_ver2 : MonoBehaviour {
         groundedStart = this.transform.position - this.transform.up * 1.2f;
         groundedEnd = this.transform.position + this.transform.up * 0.1f;
         isGrounded = Physics2D.Linecast(groundedStart, groundedEnd, groundLayer);
-        ////左下
-        //leftgroundedStart = this.transform.position - this.transform.right * 0.5f - this.transform.up * 1.2f;
-        //leftgroundedEnd = this.transform.position + this.transform.up * 0.5f;
-        //isLeftGrounded = Physics2D.Linecast(leftgroundedStart, leftgroundedEnd, groundLayer);
-        ////右下
-        //rightgroundedStart = this.transform.position - this.transform.right * -0.5f - this.transform.up * 1.2f;
-        //rightgroundedEnd = this.transform.position + this.transform.up * 0.5f;
-        //isRightGrounded = Physics2D.Linecast(rightgroundedStart, rightgroundedEnd, groundLayer);
-
         isGrounded = rb2d.IsTouching(filter2D);
     }
 
@@ -152,10 +135,13 @@ public class TestJump_ver2 : MonoBehaviour {
         {
             x = speed;
         }
+
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             x = -speed;
         }
+
+        //アニメーション
         if (Input.GetAxis("Horizontal") == 1 || Input.GetAxis("Horizontal") == -1)
         {
             if (jumpKey == 0)
@@ -170,66 +156,29 @@ public class TestJump_ver2 : MonoBehaviour {
         }
 
         // ジャンプキー取得
-        if (Input.GetButtonDown("X") || Input.GetKeyDown(KeyCode.Space) 
-            || Input.GetButtonDown("O"))
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("B") )
         {
 
             jumpKey = 1;
 
-            if (isGrounded)
-            {
-                if (Input.GetButtonDown("X"))
-                {
-                    P_jump.jumpkeyTP = 0;
-                }
-                else if (Input.GetButtonDown("O"))
-                {
-                    P_jump.jumpkeyTP = 1;
-                }
-            }
-
         }
-        else if (Input.GetButton("X") || Input.GetKey(KeyCode.Space)
-            || Input.GetButton("O"))
+        else if (Input.GetKey(KeyCode.Space) || Input.GetButton("B"))
         {
 
             jumpKey = 2;
-            if (isGrounded)
-            {
-                if (Input.GetButton("X"))
-                {
-                    P_jump.jumpkeyTP = 0;
-                }
-                else if (Input.GetButton("O"))
-                {
-                    P_jump.jumpkeyTP = 1;
-                }
-            }
 
         }
-        else if (Input.GetButtonUp("X") || Input.GetKeyUp(KeyCode.Space) 
-            || Input.GetButtonUp("O"))
+        else if (Input.GetKeyUp(KeyCode.Space) || Input.GetButtonUp("B"))
         {
 
             jumpKey = 0;
 
-            if (isGrounded)
-            {
-                if (Input.GetButtonUp("X"))
-                {
-                    P_jump.jumpkeyTP = 0;
-                }
-                else if (Input.GetButtonUp("O"))
-                {
-                    P_jump.jumpkeyTP = 1;
-                }
-            }
         }
 
         //パラソルの入力判定
         if (!isGrounded)
         {
-            if (Input.GetButtonDown("R1") && rb2d.velocity.y < parasol_line)
+            if (Input.GetButtonDown("R1"))
             {
                 if (!Parasol_flg)
                 {
@@ -237,6 +186,7 @@ public class TestJump_ver2 : MonoBehaviour {
                     Parasol_flg = true;
                 }else if (Parasol_flg)
                 {
+                    audioSource.PlayOneShot(sound1);
                     Parasol.gameObject.SetActive(false);
                     Parasol_flg = false;
                 }
@@ -244,6 +194,7 @@ public class TestJump_ver2 : MonoBehaviour {
         }
         if (isGrounded)
         {
+            //地面にいるならパラソルを消す
             Parasol.gameObject.SetActive(false);
             Parasol_flg = false;
         }
@@ -304,9 +255,13 @@ public class TestJump_ver2 : MonoBehaviour {
     void OnCollisionEnter2D(Collision2D collision)
     {
         fix = true;
-        if(collision.gameObject.tag == "Rain")
+        if (collision.gameObject.tag == "Rain_Red")
         {
-            Rainfix = true;
+            Raintype = 1;
+        }
+        else
+        {
+            Raintype = 0;
         }
     }
 
@@ -314,7 +269,7 @@ public class TestJump_ver2 : MonoBehaviour {
     void OnCollisionExit2D(Collision2D collision)
     {
         fix = false;
-        Rainfix = false;
+        Raintype = 0;
     }
 
     //Unity内の指定回数毎秒回す
@@ -323,27 +278,9 @@ public class TestJump_ver2 : MonoBehaviour {
         if (!Debug_F)
         {
             _animator.SetBool("Jump", false);
+            //横移動
             x = Input.GetAxis("Horizontal");
-            if (!isGrounded)
-            {
-                if (P_jump.jumpkeyTP == 0)
-                {
-                    gameObject.transform.position += new Vector3(x * (speed / 2.0f), 0);
-
-                }
-                else if (P_jump.jumpkeyTP == 1)
-                {
-
-                    gameObject.transform.position += new Vector3(x * speed, 0);
-
-                }
-            }
-            else if (isGrounded)
-            {
-
-                gameObject.transform.position += new Vector3(x * speed, 0);
-
-            }
+            gameObject.transform.position += new Vector3(x * speed, 0);
 
             //地面にいるとき
             if (isGrounded)
@@ -356,16 +293,16 @@ public class TestJump_ver2 : MonoBehaviour {
                     {
                         isJumpingCheck = false;
                         isJumping = true;
-                        if(P_jump.jumpkeyTP == 0)
+                        //雨の種類で飛ばす高さを変える
+                        if (Raintype == 0)
                         {
-                            JumpPower = JumpSpeed * 1.15f;
-
-                        }else if(P_jump.jumpkeyTP == 1){
-
                             JumpPower = JumpSpeed;
 
+                        }else if(Raintype == 1)
+                        {
+                            JumpPower = JumpSpeed;
+                            JumpPower += Rain_Red;
                         }
-                        rb2d.AddForce(new Vector2(rb2d.velocity.x, JumpPower));
                     }
                 }
             }
@@ -383,8 +320,16 @@ public class TestJump_ver2 : MonoBehaviour {
                 {
                     if (Parasol_flg)
                     {
-                        rb2d.AddForce(new Vector2(rb2d.velocity.x, Physics.gravity.y * (gravityRate - 0.2f)));
-                    }else if (!Parasol_flg)
+                        if (rb2d.velocity.y <= parasol_line)
+                        {
+                            rb2d.AddForce(new Vector2(rb2d.velocity.x, Physics.gravity.y));
+                        }
+                        else
+                        {
+                            rb2d.AddForce(new Vector2(rb2d.velocity.x, Physics.gravity.y * gravityRate * 2.5f));
+                        }
+                    }
+                    else if (!Parasol_flg)
                     {
                         rb2d.AddForce(new Vector2(rb2d.velocity.x, Physics.gravity.y * gravityRate * 2.5f));
                     }
@@ -403,7 +348,14 @@ public class TestJump_ver2 : MonoBehaviour {
                     {
                         if (Parasol_flg)
                         {
-                            rb2d.AddForce(new Vector2(rb2d.velocity.x, Physics.gravity.y * gravityRate));
+                            if (rb2d.velocity.y <= parasol_line)
+                            {
+                                rb2d.AddForce(new Vector2(rb2d.velocity.x, Physics.gravity.y));
+                            }
+                            else
+                            {
+                                rb2d.AddForce(new Vector2(rb2d.velocity.x, Physics.gravity.y * gravityRate * 2.5f));
+                            }
                         }
                         else if (!Parasol_flg)
                         {

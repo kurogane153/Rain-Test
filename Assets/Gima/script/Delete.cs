@@ -14,7 +14,7 @@ public class Delete : MonoBehaviour {
     //当たった時の処理
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Rain")
+        if (collision.gameObject.tag == "Rain" || collision.gameObject.tag == "Rain_Red")
         {
             Destroy(collision.gameObject);
         }
