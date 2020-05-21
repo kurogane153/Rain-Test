@@ -184,7 +184,8 @@ public class TestJump_ver2 : MonoBehaviour {
                 {
                     Parasol.gameObject.SetActive(true);
                     Parasol_flg = true;
-                }else if (Parasol_flg)
+                }
+                else if (Parasol_flg)
                 {
                     audioSource.PlayOneShot(sound1);
                     Parasol.gameObject.SetActive(false);

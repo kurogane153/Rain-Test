@@ -120,7 +120,9 @@ MonoBehaviour:
   speed: 0.05
   fix: 0
   mainsprite: {fileID: 21300000, guid: b6703d36e67488047b06385fbbf1f44f, type: 3}
-  sabsprite: {fileID: 21300000, guid: 806cec794436c454c9f64ed52c047af3, type: 3}
+  sabsprite: {fileID: 21300000, guid: 74e2e96dbfa64144eb90b1f227ff014d, type: 3}
+  particleObject: {fileID: 1179235782264612, guid: a7874d15f5d533448ba3cf92d0a61e31,
+    type: 2}
 --- !u!114 &114688666120583868
 MonoBehaviour:
   m_ObjectHideFlags: 1
