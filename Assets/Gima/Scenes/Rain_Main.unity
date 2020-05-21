@@ -10906,6 +10906,9 @@ MonoBehaviour:
   zAdjust: -12
   yAdjust: 6.2
   yAdjust_3D: -3
+  xRotation: 0
+  yRotation: 0
+  zRotation: 0
   CameraMoveSwitch: 0
   fix3d: 0
 --- !u!114 &1786537844
@@ -11333,7 +11336,7 @@ Prefab:
         type: 2}
       propertyPath: rainPrefab
       value: 
-      objectReference: {fileID: 1189255521327748, guid: ca4cf022a9439514e83d0a5a7050437a,
+      objectReference: {fileID: 1717758705804628, guid: 4f5fc41046ff83f45b129072df242163,
         type: 2}
     - target: {fileID: 1982584894130098, guid: b114036f4b7997e4da63dac32ab06c99, type: 2}
       propertyPath: m_IsActive
