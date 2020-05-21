@@ -17,6 +17,15 @@ public class CameraConntotororu : MonoBehaviour
     [SerializeField, Range(0f, 30f)]    private float yAdjust = 5.0f;
     [Header("Y軸の補正(3Dオブジェクトに乗った場合の補正)")]
     [SerializeField, Range(-30f, 0f)]    private float yAdjust_3D = -5.0f;
+    //回転補正
+    [Header("X軸の補正(回転)")]
+    [SerializeField, Range(-360f, 360f)] private float xRotation = 0.0f;
+    //回転補正
+    [Header("Y軸の補正(回転)")]
+    [SerializeField, Range(-360f, 360f)] private float yRotation = 0.0f;
+    //回転補正
+    [Header("Z軸の補正(回転)")]
+    [SerializeField, Range(-360f, 360f)] private float zRotation = 0.0f;
 
     //3D_Y軸補正用補完箱
     private float Y_Adjust = 0.0f;
@@ -37,6 +46,7 @@ public class CameraConntotororu : MonoBehaviour
         Player = GameObject.Find("Player");
         mainCamera = GameObject.Find("Main Camera");
         feda = GameObject.Find("Fade");
+        mainCamera.transform.Rotate(xRotation, yRotation, zRotation);
     }
 
     void Update()
