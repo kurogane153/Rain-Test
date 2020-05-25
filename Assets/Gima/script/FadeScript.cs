@@ -30,6 +30,7 @@ public class FadeScript : MonoBehaviour
     private bool triangle = false;
     public bool fed = false;
     public bool seen = true;
+    private GameObject Swicth;
 
     //デバッグ
     [Header("デバッグモード用(ONならチェック)")]
@@ -45,6 +46,7 @@ public class FadeScript : MonoBehaviour
         SeenChange2 = GameObject.Find("scenechange２");
         Player = GameObject.Find("Player");
         Main_camera = GameObject.Find("Main Camera");
+        Swicth = GameObject.Find("Death");
     }
 
     void Update()
@@ -53,7 +55,8 @@ public class FadeScript : MonoBehaviour
         if (Player.gameObject.GetComponent<TestJump_ver2>().Debug_F == false)
         {
             //△かTキーが押されたら
-            if (Input.GetButtonDown("triangle") || Input.GetKeyDown(KeyCode.T))
+            if (Input.GetButtonDown("triangle") || Input.GetKeyDown(KeyCode.T)
+                || Swicth.gameObject.GetComponent<Death>().fix == true)
             {
                 triangle = true;
             }

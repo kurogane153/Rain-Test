@@ -62,6 +62,7 @@ public class TestJump_ver2 : MonoBehaviour {
     [Header("ホワイトアウト用")]
     public bool Fade = false;
 
+    private float grv = 0.0f;
     Animator _animator;
     public AudioClip sound1;
     AudioSource audioSource;
@@ -259,6 +260,9 @@ public class TestJump_ver2 : MonoBehaviour {
         if (collision.gameObject.tag == "Rain_Red")
         {
             Raintype = 1;
+        }else if (collision.gameObject.tag == "Rain_White")
+        {
+            Raintype = 2;
         }
         else
         {
@@ -270,7 +274,7 @@ public class TestJump_ver2 : MonoBehaviour {
     void OnCollisionExit2D(Collision2D collision)
     {
         fix = false;
-        Raintype = 0;
+        //Raintype = 0;
     }
 
     //Unity内の指定回数毎秒回す
@@ -294,6 +298,11 @@ public class TestJump_ver2 : MonoBehaviour {
                     {
                         isJumpingCheck = false;
                         isJumping = true;
+                        if(Raintype == 2)
+                        {
+                            JumpPower = JumpSpeed;
+                            grv = 1.0f;
+                        }
                         //雨の種類で飛ばす高さを変える
                         if (Raintype == 0)
                         {
@@ -332,7 +341,21 @@ public class TestJump_ver2 : MonoBehaviour {
                     }
                     else if (!Parasol_flg)
                     {
-                        rb2d.AddForce(new Vector2(rb2d.velocity.x, Physics.gravity.y * gravityRate * 2.5f));
+                        if (Raintype == 2)
+                        {
+                            if (rb2d.velocity.y <= parasol_line)
+                            {
+                                rb2d.AddForce(new Vector2(rb2d.velocity.x, Physics.gravity.y * gravityRate * grv));
+                            }
+                            else
+                            {
+                                rb2d.AddForce(new Vector2(rb2d.velocity.x, Physics.gravity.y * gravityRate * 2.5f));
+                            }
+                        }
+                        else
+                        {
+                            rb2d.AddForce(new Vector2(rb2d.velocity.x, Physics.gravity.y * gravityRate * 2.5f));
+                        }
                     }
                 }
                 //veloctityが規定値よりも上回っていたら
@@ -360,7 +383,21 @@ public class TestJump_ver2 : MonoBehaviour {
                         }
                         else if (!Parasol_flg)
                         {
-                            rb2d.AddForce(new Vector2(rb2d.velocity.x, Physics.gravity.y * gravityRate * 2.5f));
+                            if (Raintype == 2)
+                            {
+                                if (rb2d.velocity.y <= parasol_line)
+                                {
+                                    rb2d.AddForce(new Vector2(rb2d.velocity.x, Physics.gravity.y * gravityRate * grv));
+                                }
+                                else
+                                {
+                                    rb2d.AddForce(new Vector2(rb2d.velocity.x, Physics.gravity.y * gravityRate * 2.5f));
+                                }
+                            }
+                            else
+                            {
+                                rb2d.AddForce(new Vector2(rb2d.velocity.x, Physics.gravity.y * gravityRate * 2.5f));
+                            }
                         }
                     }
                 }

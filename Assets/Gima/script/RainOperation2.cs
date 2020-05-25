@@ -14,6 +14,7 @@ public class RainOperation2 : MonoBehaviour {
     public GameObject particleObject;
     GameObject TW; // The_World_Itemオブジェクト
     GameObject Player;
+    public int cnt = 0;
 
     void Start()
     {
@@ -34,9 +35,17 @@ public class RainOperation2 : MonoBehaviour {
 
     void RainMove()
     {
-        if (TW.gameObject.GetComponent<The_World>().The_World_Switch != true)
+        if (!fix && TW.gameObject.GetComponent<The_World>().The_World_Switch != true)
         {
             this.transform.Translate(0, -speed, 0);
+        }
+        if (fix)
+        {
+            cnt++;
+            if (cnt > 180)
+            {
+                Destroy(this.gameObject);
+            }
         }
     }
 
@@ -48,10 +57,6 @@ public class RainOperation2 : MonoBehaviour {
         pos.y = this.transform.position.y + 0.5f;
         Instantiate(particleObject, pos, Quaternion.identity);
         MainSpriteRenderer.sprite = sabsprite;
-        if(collision.gameObject.tag == "Player")
-        {
-            transform.parent = Player.transform;
-        }
     }
 
     void OnCollisionExit2D(Collision2D other)

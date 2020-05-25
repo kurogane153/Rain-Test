@@ -12,9 +12,9 @@ public class CameraConntotororu : MonoBehaviour
     private GameObject feda;
     //z軸を調整。正の数ならプレイヤーの前に、負の数ならプレイヤーの後ろに配置する
     [Header("Z軸の補正")]
-    [SerializeField, Range(0f, 30f)]    private float zAdjust = -12.0f;
+    [SerializeField, Range(-30f, 30f)]    private float zAdjust = -12.0f;
     [Header("Y軸の補正")]
-    [SerializeField, Range(0f, 30f)]    private float yAdjust = 5.0f;
+    [SerializeField, Range(-30f, 30f)]    private float yAdjust = 5.0f;
     [Header("Y軸の補正(3Dオブジェクトに乗った場合の補正)")]
     [SerializeField, Range(-30f, 0f)]    private float yAdjust_3D = -5.0f;
     //回転補正

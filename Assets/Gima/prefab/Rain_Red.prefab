@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4228860682653666}
   - component: {fileID: 212591451376916912}
   - component: {fileID: 61141936062683694}
+  - component: {fileID: 114506124197170374}
   - component: {fileID: 50011430804911400}
   - component: {fileID: 114780870595964114}
   - component: {fileID: 114661744683375522}
@@ -193,6 +194,24 @@ MonoBehaviour:
   AreaY1: 999
   AreaY2: 0
   RainRot: 180
+--- !u!114 &114506124197170374
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1283881959333068}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b24efd780733b5d408c516be2ddcd4d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0.05
+  fix: 0
+  mainsprite: {fileID: 21300000, guid: 517cee6dc4cf3e242a4a75ac8db34c58, type: 3}
+  sabsprite: {fileID: 21300000, guid: 74e2e96dbfa64144eb90b1f227ff014d, type: 3}
+  particleObject: {fileID: 1179235782264612, guid: a7874d15f5d533448ba3cf92d0a61e31,
+    type: 2}
+  cnt: 0
 --- !u!114 &114661744683375522
 MonoBehaviour:
   m_ObjectHideFlags: 1
