@@ -10,6 +10,7 @@ TagManager:
   - Seen
   - fade
   - Rain_Red
+  - Rain_White
   layers:
   - Default
   - TransparentFX
