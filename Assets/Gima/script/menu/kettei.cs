@@ -15,7 +15,7 @@ public class kettei : MonoBehaviour {
     }
 
 	void Update () {
-        if (Input.GetButtonDown("O"))
+        if (Input.GetButtonDown("B"))
         {
             audioSource.PlayOneShot(sound1);
         }

@@ -10,13 +10,12 @@ public class Audio2 : MonoBehaviour {
     void Start () {
 
         audioSource = GetComponent<AudioSource>();
-
     }
 
     void Update()
     {
 
-        if (Input.GetButtonDown("X")||Input.GetButtonDown("O"))
+        if (Input.GetButtonDown("A")||Input.GetButtonDown("B"))
         {
             audioSource.PlayOneShot(sound1);
         }

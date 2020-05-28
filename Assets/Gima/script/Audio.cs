@@ -25,7 +25,7 @@ public class Audio : MonoBehaviour {
             audioSource.Stop();
             flg = false;
         }
-        if (Input.GetButton("X"))
+        if (Input.GetButton("A"))
         {
             audioSource.Stop();
             flg = true;

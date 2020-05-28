@@ -612,6 +612,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 114482084926118604, guid: 4861066734c426940893200bf0e40c41,
+        type: 2}
+      propertyPath: m_SubmitButton
+      value: B
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4861066734c426940893200bf0e40c41, type: 2}
   m_IsPrefabParent: 0
