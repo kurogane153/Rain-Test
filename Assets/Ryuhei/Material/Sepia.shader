@@ -26,7 +26,7 @@
 					half R = gray + _Strength;
 					half B = gray - _Strength;
 
-					R = (R > 1.0) ? 1.0 : R;
+					R = (R > 3.0) ? 1.0 : R;
 					B = (B < 0) ? 0 : B;
 					c.rgb = fixed3(R, gray, B);
 					return c;
