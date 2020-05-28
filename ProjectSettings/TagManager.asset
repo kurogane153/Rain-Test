@@ -11,6 +11,7 @@ TagManager:
   - fade
   - Rain_Red
   - Rain_White
+  - Rain_Green
   layers:
   - Default
   - TransparentFX

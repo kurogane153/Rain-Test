@@ -38,7 +38,6 @@ GameObject:
   - component: {fileID: 4191336571570458}
   - component: {fileID: 198308081718131356}
   - component: {fileID: 199855189525173824}
-  - component: {fileID: 114636841252325888}
   m_Layer: 0
   m_Name: CFX_ElectricityBall
   m_TagString: Untagged
@@ -115,17 +114,6 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1155563002750884}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114636841252325888
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1456115598638056}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 0}

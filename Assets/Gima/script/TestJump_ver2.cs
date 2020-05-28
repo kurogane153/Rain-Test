@@ -33,7 +33,7 @@ public class TestJump_ver2 : MonoBehaviour {
     private bool isJumping = false;
     private float JumpPower;
     //乗った雨の種類　0なら通常 1なら高いジャンプ
-    private int Raintype = 0;
+    public int Raintype = 0;
 
     [Header("落下重力")]
     [SerializeField, Range(0f, 10f)]    private float gravityRate = 1.5f;
@@ -177,29 +177,43 @@ public class TestJump_ver2 : MonoBehaviour {
         }
 
         //パラソルの入力判定
-        if (!isGrounded)
+        //if (!isGrounded)
+        //{
+        //    if (Input.GetButtonDown("R1"))
+        //    {
+        //        if (!Parasol_flg)
+        //        {
+        //            Parasol.gameObject.SetActive(true);
+        //            Parasol_flg = true;
+        //        }
+        //        else if (Parasol_flg)
+        //        {
+        //            audioSource.PlayOneShot(sound1);
+        //            Parasol.gameObject.SetActive(false);
+        //            Parasol_flg = false;
+        //        }
+        //    }
+        //}
+        if (Input.GetButtonDown("R1"))
         {
-            if (Input.GetButtonDown("R1"))
+            if (!Parasol_flg)
             {
-                if (!Parasol_flg)
-                {
-                    Parasol.gameObject.SetActive(true);
-                    Parasol_flg = true;
-                }
-                else if (Parasol_flg)
-                {
-                    audioSource.PlayOneShot(sound1);
-                    Parasol.gameObject.SetActive(false);
-                    Parasol_flg = false;
-                }
+                Parasol.gameObject.SetActive(true);
+                Parasol_flg = true;
+            }
+            else if (Parasol_flg)
+            {
+                audioSource.PlayOneShot(sound1);
+                Parasol.gameObject.SetActive(false);
+                Parasol_flg = false;
             }
         }
-        if (isGrounded)
-        {
-            //地面にいるならパラソルを消す
-            Parasol.gameObject.SetActive(false);
-            Parasol_flg = false;
-        }
+        //if (isGrounded)
+        //{
+        //    //地面にいるならパラソルを消す
+        //    Parasol.gameObject.SetActive(false);
+        //    Parasol_flg = false;
+        //}
     }
 
     //デバッグモードの移動処理
@@ -257,12 +271,15 @@ public class TestJump_ver2 : MonoBehaviour {
     void OnCollisionEnter2D(Collision2D collision)
     {
         fix = true;
-        if (collision.gameObject.tag == "Rain_Red")
+        if (collision.gameObject.tag == "Rain_Green")
         {
             Raintype = 1;
         }else if (collision.gameObject.tag == "Rain_White")
         {
             Raintype = 2;
+        } else if (collision.gameObject.tag == "Rain_Red")
+        {
+            Raintype = 3;
         }
         else
         {

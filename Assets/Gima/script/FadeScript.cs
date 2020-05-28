@@ -56,7 +56,8 @@ public class FadeScript : MonoBehaviour
         {
             //△かTキーが押されたら
             if (Input.GetButtonDown("triangle") || Input.GetKeyDown(KeyCode.T)
-                || Swicth.gameObject.GetComponent<Death>().fix == true)
+                || Swicth.gameObject.GetComponent<Death>().fix == true
+                ||Player.gameObject.GetComponent<TestJump_ver2>().Raintype == 3)
             {
                 triangle = true;
             }
