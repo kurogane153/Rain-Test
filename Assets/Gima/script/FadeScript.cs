@@ -206,7 +206,7 @@ public class FadeScript : MonoBehaviour
             {
                 if (SeenChange.gameObject.GetComponent<SceneChange>().fed == true)
                 {
-                    SceneManager.LoadScene("SecondMovie");
+                    SceneManager.LoadScene("NewStage2");
                 }else
                 {
                     SceneManager.LoadScene("ThirdMovie");
