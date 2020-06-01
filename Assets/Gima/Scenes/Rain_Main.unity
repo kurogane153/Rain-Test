@@ -26149,7 +26149,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 744088049}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 65.69452, y: 8.464055, z: 8.464055}
+  m_LocalPosition: {x: 64.5, y: 8.464055, z: 8.7}
   m_LocalScale: {x: 11.2106695, y: 28.026672, z: 2.8026674}
   m_Children: []
   m_Father: {fileID: 365986532}
@@ -36502,6 +36502,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 33
       objectReference: {fileID: 0}
+    - target: {fileID: 1948797654579394, guid: 84496fd6dddc0e94392b0b92143eb7b2, type: 2}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 84496fd6dddc0e94392b0b92143eb7b2, type: 2}
   m_IsPrefabParent: 0
@@ -36830,7 +36834,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 979102175}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 87.01722, y: 13.761097, z: 8.464055}
+  m_LocalPosition: {x: 87.01722, y: 13.761097, z: 7.9}
   m_LocalScale: {x: 10.134899, y: 38.616814, z: 2.8026686}
   m_Children: []
   m_Father: {fileID: 365986532}
@@ -82518,6 +82522,12 @@ Prefab:
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 519420028}
+    - target: {fileID: 212497485034919692, guid: c5c45d04a24a6d14eade07590ba8b4f1,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e8593b2e2502bb74cb5cd9dd7f9630e8,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c5c45d04a24a6d14eade07590ba8b4f1, type: 2}
   m_IsPrefabParent: 0
@@ -83998,8 +84008,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2067310181}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 49.66327, y: 7, z: 1}
-  m_LocalScale: {x: 20, y: 20, z: 1}
+  m_LocalPosition: {x: -16, y: 3, z: 1}
+  m_LocalScale: {x: 19.38492, y: 19.38492, z: 0.969246}
   m_Children: []
   m_Father: {fileID: 1551898408}
   m_RootOrder: 0
@@ -84040,7 +84050,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -20
-  m_Sprite: {fileID: 21300000, guid: 025fd8ae806b9034cb54b810ff66e6b9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7a152544f1903d64486e255937b852fe, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
