@@ -17,7 +17,7 @@ public class SisterMove : MonoBehaviour {
         transform.position += new Vector3(0, Mathf.Sin(Timer / 30) * 0.050f, 0);
 
 
-        if (++Timer >= 180)
+        if (++Timer >= 300)
         {
 
             // transformを取得
@@ -29,7 +29,7 @@ public class SisterMove : MonoBehaviour {
 
             myTransform.position = pos;  // 座標を設定
         }
-        if (Timer >= 360)
+        if (Timer >= 480)
         {
             this.gameObject.SetActive(false);
         }
