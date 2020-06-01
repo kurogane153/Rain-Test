@@ -41,7 +41,7 @@ public class ScreenTransitionMove1 : MonoBehaviour {
             else if (alfa > 1.0f)
             {
                 fast = false;
-                SceneManager.LoadScene("Rain_Main");
+                SceneManager.LoadScene("Rain_Main_ForR");
             }
         }
     }
