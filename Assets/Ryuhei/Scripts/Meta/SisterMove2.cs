@@ -35,6 +35,11 @@ public class SisterMove2 : MonoBehaviour
                 pos.y += 0.05f;    // x座標へ0.01加算
 
                 myTransform.position = pos;  // 座標を設定
+
+                // 徐々にこの画像をフェードアウトする
+                UnityEngine.Color tmp = this.GetComponent<SpriteRenderer>().color;
+                tmp.a = tmp.a -= 0.0050f;
+                this.GetComponent<SpriteRenderer>().color = tmp;
             }
             if (Timer >= 480)
             {
