@@ -156,7 +156,7 @@ Prefab:
         type: 2}
       propertyPath: m_VideoClip
       value: 
-      objectReference: {fileID: 32900000, guid: 0628ee3134c21024fbbad6f47db0c962,
+      objectReference: {fileID: 32900000, guid: b90148b2fdef2f04688a3ff9cfe2c6c3,
         type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 701c344921bdfd8488eda6e2d815faaf, type: 2}
@@ -566,7 +566,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1833278598
 MonoBehaviour:
@@ -683,7 +683,7 @@ RectTransform:
   - {fileID: 1571884066}
   - {fileID: 1111362712}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
