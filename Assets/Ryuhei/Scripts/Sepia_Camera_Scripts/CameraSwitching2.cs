@@ -74,11 +74,6 @@ public class CameraSwitching2 : MonoBehaviour
                 A -= 0.0050f;
                 Debug.Log("-=0.0050");
             }
-
-            //if (A <= 0.0f && FadeInSwitch == true)
-            //{
-            //    Finish();
-            //}
         }
     }
 
@@ -95,6 +90,7 @@ public class CameraSwitching2 : MonoBehaviour
         subCamera.SetActive(false);
 
         A = 0.0f;
+        panel.GetComponent<Image>().color = new Color(R, G, B, A);
         FadeInSwitch = false;
         SuperFadeInSwitch = false;
 
