@@ -159,7 +159,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0.05
   fix: 0
-  mainsprite: {fileID: 21300000, guid: 517cee6dc4cf3e242a4a75ac8db34c58, type: 3}
+  mainsprite: {fileID: 21300000, guid: abb5ed6e328fba84c8a78610e96e3754, type: 3}
   sabsprite: {fileID: 21300000, guid: 74e2e96dbfa64144eb90b1f227ff014d, type: 3}
   particleObject: {fileID: 1179235782264612, guid: a7874d15f5d533448ba3cf92d0a61e31,
     type: 2}
@@ -273,7 +273,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0.055
   fix: 0
-  mainsprite: {fileID: 21300000, guid: b6703d36e67488047b06385fbbf1f44f, type: 3}
+  mainsprite: {fileID: 21300000, guid: abb5ed6e328fba84c8a78610e96e3754, type: 3}
   sabsprite: {fileID: 21300000, guid: 74e2e96dbfa64144eb90b1f227ff014d, type: 3}
   particleObject: {fileID: 1179235782264612, guid: a7874d15f5d533448ba3cf92d0a61e31,
     type: 2}
@@ -292,7 +292,7 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: a995617f31aeede449f4a3af660c21ff, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -312,8 +312,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 4
-  m_Sprite: {fileID: 21300000, guid: b6703d36e67488047b06385fbbf1f44f, type: 3}
-  m_Color: {r: 1, g: 0.9372134, b: 0.042452812, a: 1}
+  m_Sprite: {fileID: 21300000, guid: abb5ed6e328fba84c8a78610e96e3754, type: 3}
+  m_Color: {r: 0.9866247, g: 1, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

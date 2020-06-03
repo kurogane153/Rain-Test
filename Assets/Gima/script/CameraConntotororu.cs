@@ -6,7 +6,7 @@ public class CameraConntotororu : MonoBehaviour
 {
 
     //カメラオブジェクト
-    public GameObject mainCamera;
+    private GameObject mainCamera;
     //プレイヤーオブジェクト
     private GameObject Player;
     private GameObject feda;

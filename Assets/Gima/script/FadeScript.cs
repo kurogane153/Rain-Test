@@ -31,6 +31,7 @@ public class FadeScript : MonoBehaviour
     public bool fed = false;
     public bool seen = true;
     private GameObject Swicth;
+    public static bool ReStart = false;
 
     //デバッグ
     [Header("デバッグモード用(ONならチェック)")]
@@ -165,6 +166,8 @@ public class FadeScript : MonoBehaviour
             }
             if (alfa > 1.0f)
             {
+                ReStart = true;
+                SceneManager.LoadScene("GameOver");
                 //リスポーン地点にリスポーンさせる
                 Player.transform.position = 
                     Player.gameObject.GetComponent<TestJump_ver2>().restartPoint;
@@ -191,6 +194,11 @@ public class FadeScript : MonoBehaviour
                 }
             }
         }
+    }
+
+    public static bool Res()
+    {
+        return ReStart;
     }
 
     void Seen()
