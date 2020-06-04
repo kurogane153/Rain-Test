@@ -23,7 +23,7 @@ public class GateR : MonoBehaviour {
 
     void Update () {
 
-        if (280.0f <= Player.transform.position.x)
+        if (297.0f <= Player.transform.position.x)
         {
             EDInisSwitch = true;
         }

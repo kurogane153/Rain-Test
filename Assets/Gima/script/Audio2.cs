@@ -24,6 +24,5 @@ public class Audio2 : MonoBehaviour {
                 audioSource.PlayOneShot(sound1);
             }
         }
-
     }
 }
