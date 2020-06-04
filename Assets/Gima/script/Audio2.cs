@@ -6,18 +6,23 @@ public class Audio2 : MonoBehaviour {
 
     public AudioClip sound1;
     AudioSource audioSource;
+    private GameObject Player;
 
     void Start () {
 
+        Player = GameObject.Find("Player");
         audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
     {
 
-        if (Input.GetButtonDown("A")||Input.GetButtonDown("B"))
+        if (Input.GetButtonDown("B"))
         {
-            audioSource.PlayOneShot(sound1);
+            if (Player.gameObject.GetComponent<TestJump_ver2>().isGrounded)
+            {
+                audioSource.PlayOneShot(sound1);
+            }
         }
 
     }

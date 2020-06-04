@@ -72,6 +72,8 @@ public class TestJump_ver2 : MonoBehaviour {
     private GameObject fade;
     //public bool Rainfix = false;
     public static Vector3 pos_p;
+    public static Vector3 pos_p2;
+    public static bool st1;
 
     [Header("パラソルを出した時の上昇補正用　rb2d.velocity.y <= parasol_line")]
     [SerializeField, Range(0f, 10f)] private float parasol_line = 5.0f;
@@ -81,8 +83,10 @@ public class TestJump_ver2 : MonoBehaviour {
 
     void Start()
     {
-        bool res_g = GameOver.Res_G();
-        Vector3 pos_g = GameOver.pos_G();
+        //２ステに入った判定
+        bool res2 = CameraSwitching2.Res2nd();
+        //Vector3 pos_g = GameOver.pos_G();
+        //Vector3 pos2_g = GameOver.pos2_G();
         rb2d = GetComponent<Rigidbody2D>();
         restartPoint = this.transform.position;
         _animator = GetComponent<Animator>();
@@ -90,10 +94,17 @@ public class TestJump_ver2 : MonoBehaviour {
         Parasol = GameObject.Find("Parasol");
         DebugRes = GameObject.Find("DebugRes");
         fade = GameObject.Find("Fade");
-        if (res_g)
+        if (CameraSwitching2.Res2)
         {
-            this.transform.position = pos_g;
+            this.transform.position = pos_p2;
         }
+        else if (!CameraSwitching2.Res2 && st1 == true)
+        {
+            Debug.Log(st1);
+            this.transform.position = pos_p;
+        }
+        Parasol.gameObject.SetActive(false);
+        Parasol_flg = false;
     }
 
     void Update()
@@ -270,6 +281,15 @@ public class TestJump_ver2 : MonoBehaviour {
             restartPoint = collision.transform.position;
             pos_p = restartPoint;
             Destroy(collision.gameObject);
+        }else if(collision.tag == "Respaen2")
+        {
+            restartPoint = collision.transform.position;
+            pos_p2 = restartPoint;
+            Destroy(collision.gameObject);
+        }
+        if (collision.tag == "stage1")
+        {
+            st1 = true;
         }
         if (collision.tag == "fade")
         {
@@ -466,5 +486,15 @@ public class TestJump_ver2 : MonoBehaviour {
     public static Vector3 pos()
     {
         return pos_p;
+    }
+
+    public static Vector3 pos2()
+    {
+        return pos_p2;
+    }
+
+    public static bool St1()
+    {
+        return st1;
     }
 }

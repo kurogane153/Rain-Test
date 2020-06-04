@@ -48,7 +48,7 @@ Transform:
   m_GameObject: {fileID: 1958757787434124}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -22.47, y: -2.05, z: 0}
-  m_LocalScale: {x: 0.63436466, y: 0.63436466, z: 0.63436466}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -89,7 +89,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.5, y: 2.5}
+    oldSize: {x: 1.6666666, y: 1.6666666}
     newSize: {x: 1.42, y: 2.17}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -160,7 +160,7 @@ MonoBehaviour:
   speed: 0.05
   fix: 0
   mainsprite: {fileID: 21300000, guid: abb5ed6e328fba84c8a78610e96e3754, type: 3}
-  sabsprite: {fileID: 21300000, guid: 74e2e96dbfa64144eb90b1f227ff014d, type: 3}
+  sabsprite: {fileID: 21300000, guid: 1a95927a4342cf144be7428a32b6b31d, type: 3}
   particleObject: {fileID: 1179235782264612, guid: a7874d15f5d533448ba3cf92d0a61e31,
     type: 2}
   cnt: 0
@@ -274,7 +274,7 @@ MonoBehaviour:
   speed: 0.055
   fix: 0
   mainsprite: {fileID: 21300000, guid: abb5ed6e328fba84c8a78610e96e3754, type: 3}
-  sabsprite: {fileID: 21300000, guid: 74e2e96dbfa64144eb90b1f227ff014d, type: 3}
+  sabsprite: {fileID: 21300000, guid: 1a95927a4342cf144be7428a32b6b31d, type: 3}
   particleObject: {fileID: 1179235782264612, guid: a7874d15f5d533448ba3cf92d0a61e31,
     type: 2}
 --- !u!212 &212953625708493462

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SisterMove2 : MonoBehaviour
+public class SisterMove3 : MonoBehaviour
 {
 
     private bool ThisEventTrigger = false;

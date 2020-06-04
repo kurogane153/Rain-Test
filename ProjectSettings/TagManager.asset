@@ -12,6 +12,8 @@ TagManager:
   - Rain_Red
   - Rain_White
   - Rain_Green
+  - Respaen2
+  - stage1
   layers:
   - Default
   - TransparentFX

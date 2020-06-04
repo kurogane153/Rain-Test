@@ -15,6 +15,8 @@ public class CameraSwitching2 : MonoBehaviour
     private bool SuperFadeInSwitch = false;
     private bool FadeInSwitch = false;
 
+    public static bool Res2 = false;
+
 
     //呼び出し時に実行される関数
     void Start()
@@ -37,17 +39,23 @@ public class CameraSwitching2 : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
         //if (collision.gameObject.tag == "Player")
         //{
         //    subCamera.SetActive(true);
         //    Debug.Log("sepia");
         //}
+        Res2 = true;
+    }
+
+    public static bool Res2nd()
+    {
+        return Res2;
     }
 
 
-    private void OnTriggerStay2D(Collider2D collision)
+    void OnTriggerStay2D(Collider2D collision)
     {
         SuperFadeInSwitch = true;
     }
@@ -67,12 +75,13 @@ public class CameraSwitching2 : MonoBehaviour
             {
                 FadeInSwitch = true;
                 subCamera.SetActive(true);
+                Debug.Log("SepiaTrue");
             }
 
             if (FadeInSwitch == true)
             {
                 A -= 0.0050f;
-                Debug.Log("-=0.0050");
+                
             }
         }
     }

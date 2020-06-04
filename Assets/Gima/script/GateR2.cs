@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement; //シーン切り替えに使用するライブラリ
 
-public class GateR : MonoBehaviour {
+public class GateR2 : MonoBehaviour {
 
     float alfa;
     private float Rot = 0.0f;
@@ -14,20 +14,22 @@ public class GateR : MonoBehaviour {
     private GameObject image_object;
     float speed = 0.01f;
 
-    void Start () {
+    void Start()
+    {
         Player = GameObject.Find("Player");
         image_object = GameObject.Find("Image");
         Img = image_object.GetComponent<Image>();
     }
-    
 
-    void Update () {
 
-        if (280.0f <= Player.transform.position.x)
+    void Update()
+    {
+
+        if (160.0f <= Player.transform.position.x)
         {
             EDInisSwitch = true;
         }
-        
+
         if (EDInisSwitch == true)
         {
 
@@ -48,10 +50,12 @@ public class GateR : MonoBehaviour {
                 }
                 else if (alfa > 1.0f)
                 {
-                    SceneManager.LoadScene("Last_MV");
+                    FadeScript.ReStart = false;
+                    TestJump_ver2.st1 = false;
+                    SceneManager.LoadScene("SecondMovie");
                 }
                 EDInisSwitch = false;
             }
         }
-	}
+    }
 }

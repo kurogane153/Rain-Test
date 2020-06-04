@@ -41,6 +41,7 @@ public class ScreenTransitionMove2 : MonoBehaviour {
             else if (alfa > 1.0f)
             {
                 fast = false;
+
                 SceneManager.LoadScene("NewStage2");
             }
         }

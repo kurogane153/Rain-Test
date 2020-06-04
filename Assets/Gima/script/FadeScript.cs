@@ -57,19 +57,18 @@ public class FadeScript : MonoBehaviour
         {
             //△かTキーが押されたら
             if (Input.GetButtonDown("triangle") || Input.GetKeyDown(KeyCode.T)
-                || Swicth.gameObject.GetComponent<Death>().fix == true
-                || Player.gameObject.GetComponent<TestJump_ver2>().Raintype == 3)
+                || Swicth.gameObject.GetComponent<Death>().fix == true)
             {
                 triangle = true;
             }
             ResPown();
             PlayerOnRain();
             Fade();
-            if (SeenChange.gameObject.GetComponent<SceneChange>().fed == true ||
-                SeenChange2.gameObject.GetComponent<scenechange２>().fed2 ==true)
-            {
-                Seen();
-            }
+            //if (SeenChange.gameObject.GetComponent<SceneChange>().fed == true ||
+            //    SeenChange2.gameObject.GetComponent<scenechange２>().fed2 ==true)
+            //{
+            //    Seen();
+            //}
         }
 
         //ホワイトアウト
@@ -159,7 +158,7 @@ public class FadeScript : MonoBehaviour
         if (flg)
         {
             //現在のプレイヤーの位置　＜　セーブしてあるプレイヤーのY座標　+　既定の値
-            if (Player.transform.position.y < p_v.y + (dead))
+            if (Player.transform.position.y < p_v.y + (dead) || Player.gameObject.GetComponent<TestJump_ver2>().Raintype == 3)
             {
                 GetComponent<Image>().color = new Color(red, green, blue, alfa);
                 alfa += speed;
@@ -214,6 +213,8 @@ public class FadeScript : MonoBehaviour
             {
                 if (SeenChange.gameObject.GetComponent<SceneChange>().fed == true)
                 {
+                    ReStart = false;
+                    TestJump_ver2.st1 = false;
                     SceneManager.LoadScene("SecondMovie");
                 }else
                 {

@@ -41,7 +41,7 @@ public class ScreenTransitionMove4 : MonoBehaviour {
             else if (alfa > 1.0f)
             {
                 fast = false;
-                SceneManager.LoadScene("ED");
+                SceneManager.LoadScene("Title");
             }
         }
     }

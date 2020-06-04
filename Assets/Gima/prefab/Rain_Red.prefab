@@ -88,7 +88,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.5, y: 2.5}
+    oldSize: {x: 1.6666666, y: 1.6666666}
     newSize: {x: 1.42, y: 2.17}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -174,8 +174,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0.055
   fix: 0
-  mainsprite: {fileID: 21300000, guid: b6703d36e67488047b06385fbbf1f44f, type: 3}
-  sabsprite: {fileID: 21300000, guid: 74e2e96dbfa64144eb90b1f227ff014d, type: 3}
+  mainsprite: {fileID: 21300000, guid: abb5ed6e328fba84c8a78610e96e3754, type: 3}
+  sabsprite: {fileID: 21300000, guid: 1a95927a4342cf144be7428a32b6b31d, type: 3}
   particleObject: {fileID: 1179235782264612, guid: a7874d15f5d533448ba3cf92d0a61e31,
     type: 2}
 --- !u!114 &114370805967005152
@@ -293,8 +293,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 4
-  m_Sprite: {fileID: 21300000, guid: b6703d36e67488047b06385fbbf1f44f, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: abb5ed6e328fba84c8a78610e96e3754, type: 3}
+  m_Color: {r: 0.1695311, g: 1, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

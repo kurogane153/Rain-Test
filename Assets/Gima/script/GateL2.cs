@@ -2,26 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GateL : MonoBehaviour {
+public class GateL2 : MonoBehaviour {
 
     private float Rot = 0.0f;
     private GameObject Player;
     private bool EDInisSwitch = false;
 
-	// Use this for initialization
-	void Start () {
+    void Start () {
         Player = GameObject.Find("Player");
-	}
-    
+    }
 
-    // Update is called once per frame
-    void Update () {
-
-        if (280.0f <= Player.transform.position.x)
+	void Update () {
+        if (160.0f <= Player.transform.position.x)
         {
             EDInisSwitch = true;
         }
-        
+
         if (EDInisSwitch == true)
         {
             if (Rot <= 1.0f)
@@ -37,5 +33,5 @@ public class GateL : MonoBehaviour {
                 EDInisSwitch = false;
             }
         }
-	}
+    }
 }
