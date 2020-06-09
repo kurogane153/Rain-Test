@@ -6,13 +6,6 @@ public class Delete : MonoBehaviour {
 
     public bool fix = false;
 
-    //GameObject obj;
-
-    //void Start()
-    //{
-    //   obj = GameObject.Find("Rain");
-    //}
-
     //当たった時の処理
     private void OnTriggerEnter2D(Collider2D collision)
     {

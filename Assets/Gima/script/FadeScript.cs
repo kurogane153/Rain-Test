@@ -8,9 +8,6 @@ public class FadeScript : MonoBehaviour
     float alfa;
     float alfa2 = 0.0f;
     float alfa3 = 0.0f;
-    //float alfa4 = 0.0f;
-    //float redin = 0;
-    //bool fade_F = false;
 
     [Header("フェードの速さ")]
     [SerializeField, Range(0f, 5f)] private float speed = 0.05f;
@@ -23,15 +20,12 @@ public class FadeScript : MonoBehaviour
 
     private GameObject Player;
     private GameObject Main_camera;
-    //private GameObject SeenChange;
-    //private GameObject SeenChange2;
     private bool flg = false;
     private Vector3 p_v;
     private bool triangle = false;
     public bool fed = false;
     private GameObject Swicth;
     private GameObject hed;
-    //public static bool ReStart = false;
 
     //デバッグ
     [Header("デバッグモード用(ONならチェック)")]
@@ -43,8 +37,6 @@ public class FadeScript : MonoBehaviour
         red = GetComponent<Image>().color.r;
         green = GetComponent<Image>().color.g;
         blue = GetComponent<Image>().color.b;
-        //SeenChange = GameObject.Find("Scene Change");
-        //SeenChange2 = GameObject.Find("scenechange２");
         Player = GameObject.Find("Player");
         Main_camera = GameObject.Find("Main Camera");
         Swicth = GameObject.Find("Death");
@@ -94,7 +86,9 @@ public class FadeScript : MonoBehaviour
         }
     }
 
-    //リスポーンポイントにリスポーンさせる
+    /// <summary>
+    /// リスポーンポイントにリスポーンさせる
+    /// </summary>
     void ResPown()
     {
         //フラグがONなら
@@ -127,6 +121,9 @@ public class FadeScript : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 落下フェードアウト
+    /// </summary>
     void Fade()
     {
         //フラグ（空中ならON）
@@ -167,13 +164,16 @@ public class FadeScript : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 緑の雨に触れた処理
+    /// </summary>
     void GreenRain()
     {
+        //頭・体に緑が触れたら
         if (hed.gameObject.GetComponent<Delete>().fix == true || Player.gameObject.GetComponent<TestJump_ver2>().Raintype == 3)
         {
             GetComponent<Image>().color = new Color(red, green, blue, alfa3);
             alfa3 += speed;
-            Debug.Log(alfa3);
             if (alfa3 > 1.0f)
             {
                 SceneManager.LoadScene("GameOver");

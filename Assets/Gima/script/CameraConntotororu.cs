@@ -78,7 +78,6 @@ public class CameraConntotororu : MonoBehaviour
             {
                 pos_p = TestJump_ver2.pos_p;
                 pos_p.z = zAdjust;
-                Debug.Log(pos_p);
             }
             else
             {

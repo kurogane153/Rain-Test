@@ -9,12 +9,8 @@ public class GameOver : MonoBehaviour {
     float alfa = 0.0f;
     bool flg = false;
     bool flg2 = false;
-    public static bool res2;
     private Image Img;
     private GameObject image_object;
-    public static Vector3 pos_p;
-    public static Vector3 pos2_p;
-    public static bool res;
     public static bool ris = false;
 
     float speed = 0.05f;
@@ -36,21 +32,14 @@ public class GameOver : MonoBehaviour {
             }
             else if (alfa > 1.0f)
             {
-                //pos_p = TestJump_ver2.pos();
-                //res = FadeScript.Res();
-                //res = FadeScript.Res();
-                //res2 = CameraSwitching2.Res2nd();
                 if (CameraSwitching2.Res2)
                 {
-                    //pos2_p = TestJump_ver2.pos2();
                     TestJump_ver2.st1 = false;
-                    //Debug.Log(CameraSwitching2.Res2);
+                    ris = true;
                     SceneManager.LoadScene("NewStage2");
                 }
                 else if(TestJump_ver2.st1)
                 {
-                    //pos_p = TestJump_ver2.pos();
-                    //Debug.Log(TestJump_ver2.st1);
                     ris = true;
                     SceneManager.LoadScene("Rain_Main_ForR");
                 }
@@ -68,22 +57,6 @@ public class GameOver : MonoBehaviour {
                 SceneManager.LoadScene("Title");
             }
         }
-    }
-
-    public static bool Res_G()
-    {
-        return res;
-    }
-
-
-    public static Vector3 pos_G()
-    {
-        return pos_p;
-    }
-
-    public static Vector3 pos2_G()
-    {
-        return pos2_p;
     }
 
     public void ReStartButton()
