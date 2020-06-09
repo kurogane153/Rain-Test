@@ -5,40 +5,66 @@ using UnityEngine;
 public class SisterMove : MonoBehaviour {
 
     private int Timer = 0;
+    private GameObject Player;
+    public float PlayerPositionX = -45.0f;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
+    // Use this for initialization
+    void Start () {
+
+
+        Player = GameObject.Find("Player");
+        PlayerPositionX = Player.transform.position.x;
+    }
 	
 	// Update is called once per frame
 	void FixedUpdate () {
 
-        transform.position += new Vector3(0, Mathf.Sin(Timer / 30) * 0.050f, 0);
+        PlayerPositionX = Player.transform.position.x;
 
-
-        if (++Timer >= 300)
+        if (PlayerPositionX <= -44.0f)
         {
+            transform.position += new Vector3(0, Mathf.Sin(Timer / 30) * 0.050f, 0);
 
-            // transformを取得
-            Transform myTransform = this.transform;
+            if (++Timer >= 300)
+            {
 
-            // 座標を取得
-            Vector3 pos = myTransform.position;
-            pos.x += 0.05f;    // x座標へ0.01加算
+                // transformを取得
+                Transform myTransform = this.transform;
 
-            myTransform.position = pos;  // 座標を設定
+                // 座標を取得
+                Vector3 pos = myTransform.position;
+                pos.x += 0.05f;    // x座標へ0.01加算
 
-            // 徐々にこの画像をフェードアウトする
-            UnityEngine.Color tmp = this.GetComponent<SpriteRenderer>().color;
-            tmp.a = tmp.a -= 0.0050f;
-            this.GetComponent<SpriteRenderer>().color = tmp;
+                myTransform.position = pos;  // 座標を設定
 
+                // 徐々にこの画像をフェードアウトする
+                UnityEngine.Color tmp = this.GetComponent<SpriteRenderer>().color;
+                tmp.a = tmp.a -= 0.0050f;
+                this.GetComponent<SpriteRenderer>().color = tmp;
+
+            }
+            if (Timer >= 480)
+            {
+                this.gameObject.SetActive(false);
+            }
         }
-        if (Timer >= 480)
+        else
         {
             this.gameObject.SetActive(false);
         }
 
-	}
+
+        Debug.Log(PlayerPositionX);
+    }
+
+    //private void OnLevelWasLoaded(int level)
+    //{ これリスポーン前に発動しちゃうのよね……
+        
+
+    //    Debug.Log(PlayerPositionX);
+
+    //}
+
+
+
 }

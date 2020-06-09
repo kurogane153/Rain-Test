@@ -17,6 +17,9 @@ public class CameraSwitching2 : MonoBehaviour
 
     public static bool Res2 = false;
 
+    private float PlayerPositionX;
+    public float ThisEventOutPositionX; // この座標以上の位置にプレイヤーがいる時、このイベントをオフにする
+
 
     //呼び出し時に実行される関数
     void Start()
@@ -62,27 +65,36 @@ public class CameraSwitching2 : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (SuperFadeInSwitch == true)
+        PlayerPositionX = Player.transform.position.x;
+
+        if (PlayerPositionX <= ThisEventOutPositionX)
         {
-            panel.GetComponent<Image>().color = new Color(R, G, B, A);
-
-            if (FadeInSwitch == false)
+            if (SuperFadeInSwitch == true)
             {
-                A += 0.0050f;
-            }
+                panel.GetComponent<Image>().color = new Color(R, G, B, A);
 
-            if (A >= 1.0f && FadeInSwitch == false)
-            {
-                FadeInSwitch = true;
-                subCamera.SetActive(true);
-                Debug.Log("SepiaTrue");
-            }
+                if (FadeInSwitch == false)
+                {
+                    A += 0.0050f;
+                }
 
-            if (FadeInSwitch == true)
-            {
-                A -= 0.0050f;
-                
+                if (A >= 1.0f && FadeInSwitch == false)
+                {
+                    FadeInSwitch = true;
+                    subCamera.SetActive(true);
+                    Debug.Log("SepiaTrue");
+                }
+
+                if (FadeInSwitch == true)
+                {
+                    A -= 0.0050f;
+
+                }
             }
+        }
+        else
+        {
+            Finish();
         }
     }
 

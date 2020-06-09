@@ -32,6 +32,7 @@ GameObject:
   - component: {fileID: 114129614592978958}
   - component: {fileID: 114443339704007140}
   - component: {fileID: 114097851630032896}
+  - component: {fileID: 114350314377184792}
   m_Layer: 8
   m_Name: Rain_Red_Stage2
   m_TagString: Rain_Red
@@ -162,6 +163,22 @@ MonoBehaviour:
   sabsprite: {fileID: 21300000, guid: 1a95927a4342cf144be7428a32b6b31d, type: 3}
   particleObject: {fileID: 1179235782264612, guid: a7874d15f5d533448ba3cf92d0a61e31,
     type: 2}
+--- !u!114 &114350314377184792
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1701318271795558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e179720351c403c4cadd8fc1e20caa48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AreaX1: 286
+  AreaX2: 320
+  AreaY1: 999
+  AreaY2: 0
+  RainRot: -180
 --- !u!114 &114443339704007140
 MonoBehaviour:
   m_ObjectHideFlags: 1
