@@ -4,12 +4,7 @@ using UnityEngine;
 
 public class Delete : MonoBehaviour {
 
-    //GameObject obj;
-
-    //void Start()
-    //{
-    //   obj = GameObject.Find("Rain");
-    //}
+    public bool fix = false;
 
     //当たった時の処理
     private void OnTriggerEnter2D(Collider2D collision)
@@ -18,6 +13,10 @@ public class Delete : MonoBehaviour {
             || collision.gameObject.tag == "Rain_White")
         {
             Destroy(collision.gameObject);
+        }
+        if(collision.gameObject.tag == "Rain_Red")
+        {
+            fix = true;
         }
     }
 }

@@ -29,7 +29,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Gima/Scenes/GameOver.unity
     guid: 9b92461f69db88a409728b86292408f1
-  - enabled: 1
-    path: Assets/Gima/Scenes/ED.unity
-    guid: f50b472e07a11bf4395ae731dd355a71
   m_configObjects: {}

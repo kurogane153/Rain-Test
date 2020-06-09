@@ -19,9 +19,4 @@ public class Death : MonoBehaviour {
             fix = true;
         }   
     }
-
-    void OnCollisionExit2D(Collision2D collision)
-    {
-        fix = false;   
-    }
 }
