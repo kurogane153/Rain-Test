@@ -40,6 +40,7 @@ public class CameraConntotororu : MonoBehaviour
     public bool CameraMoveSwitch = false;
     public bool fix3d;
     private bool tri = false;
+    private bool floor = false;
 
     void Start()
     {
@@ -71,11 +72,27 @@ public class CameraConntotororu : MonoBehaviour
     void FixedUpdate()
     {
         if (Input.GetButtonDown("triangle") || Input.GetKeyDown(KeyCode.T) ||
-            feda.gameObject.GetComponent<FadeScript>().fed == true)
+            feda.gameObject.GetComponent<FadeScript>().fed == true || GameOver.ris)
         {
+            if (TestJump_ver2.st1)
+            {
+                pos_p = TestJump_ver2.pos_p;
+                pos_p.z = zAdjust;
+                Debug.Log(pos_p);
+            }
+            else
+            {
+                pos_p = TestJump_ver2.pos_p2;
+                pos_p.z = zAdjust;
+            }
             pos_p.z = zAdjust;
+            if (floor)
+            {
+                pos_p.y += 5;
+            }
             mainCamera.transform.position = pos_p;
             tri = true;
+            GameOver.ris = false;
         }
 
         CameraMoveOnRain(); // カメラが雨粒に乗ったときのうごき
@@ -111,10 +128,15 @@ public class CameraConntotororu : MonoBehaviour
             fix3d = true;
             Y_Adjust = yAdjust_3D;
         }
+        else if(collision.gameObject.tag == "floor")
+        {
+            floor = true;
+        }
     }
 
     void OnCollisionExit2D(Collision2D collision)
     {
+        floor = false;
         fix3d = false;
         Y_Adjust = 0.0f;
     }

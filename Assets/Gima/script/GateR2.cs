@@ -38,7 +38,6 @@ public class GateR2 : MonoBehaviour {
                 Rot -= 0.01f;
                 this.gameObject.transform.Rotate(0, 0, Rot);
 
-                //Debug.Log(Rot);
             }
 
             if (Rot < -0.50f)
@@ -50,7 +49,7 @@ public class GateR2 : MonoBehaviour {
                 }
                 else if (alfa > 1.0f)
                 {
-                    FadeScript.ReStart = false;
+                    //FadeScript.ReStart = false;
                     TestJump_ver2.st1 = false;
                     SceneManager.LoadScene("SecondMovie");
                 }

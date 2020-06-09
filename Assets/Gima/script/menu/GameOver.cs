@@ -15,6 +15,7 @@ public class GameOver : MonoBehaviour {
     public static Vector3 pos_p;
     public static Vector3 pos2_p;
     public static bool res;
+    public static bool ris = false;
 
     float speed = 0.05f;
 
@@ -50,6 +51,7 @@ public class GameOver : MonoBehaviour {
                 {
                     //pos_p = TestJump_ver2.pos();
                     //Debug.Log(TestJump_ver2.st1);
+                    ris = true;
                     SceneManager.LoadScene("Rain_Main_ForR");
                 }
             }

@@ -10,6 +10,7 @@ public class ScreenTransition : MonoBehaviour {
     bool flg = false;
     private Image Img;
     private GameObject image_object;
+    public static bool title = true;
 
     float speed =0.05f;
 
@@ -17,6 +18,8 @@ public class ScreenTransition : MonoBehaviour {
     {
         image_object = GameObject.Find("Image");
         Img = image_object.GetComponent<Image>();
+        TestJump_ver2.st1 = false;
+        CameraSwitching2.Res2 = false;
     }
 
     void Update()
@@ -30,6 +33,7 @@ public class ScreenTransition : MonoBehaviour {
             }
             else if (alfa > 1.0f)
             {
+                title = true;
                 SceneManager.LoadScene("FastMovie");
             }
         }

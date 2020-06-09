@@ -59,18 +59,13 @@ public class TestJump_ver2 : MonoBehaviour {
     [Header("デバッグモードがOnかOffか")]
     public bool Debug_F = false;
 
-    [Header("ホワイトアウト用")]
-    public bool Fade = false;
-
     private float grv = 0.0f;
     Animator _animator;
     public AudioClip sound1;
     AudioSource audioSource;
     private GameObject Parasol;
-    private bool Parasol_flg = true;
+    private bool Parasol_flg = false;
     private GameObject DebugRes;
-    private GameObject fade;
-    //public bool Rainfix = false;
     public static Vector3 pos_p;
     public static Vector3 pos_p2;
     public static bool st1;
@@ -83,25 +78,29 @@ public class TestJump_ver2 : MonoBehaviour {
 
     void Start()
     {
-        //２ステに入った判定
-        bool res2 = CameraSwitching2.Res2nd();
-        //Vector3 pos_g = GameOver.pos_G();
-        //Vector3 pos2_g = GameOver.pos2_G();
         rb2d = GetComponent<Rigidbody2D>();
         restartPoint = this.transform.position;
         _animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
         Parasol = GameObject.Find("Parasol");
         DebugRes = GameObject.Find("DebugRes");
-        fade = GameObject.Find("Fade");
+
         if (CameraSwitching2.Res2)
         {
             this.transform.position = pos_p2;
         }
         else if (!CameraSwitching2.Res2 && st1 == true)
         {
-            Debug.Log(st1);
             this.transform.position = pos_p;
+        }
+        if (ScreenTransition.title)
+        {
+            Vector3 pos;
+            pos.x = -12.18725f;
+            pos.y = -3.5f;
+            pos.z = 0f;
+            this.transform.position = pos;
+            ScreenTransition.title = false;
         }
         Parasol.gameObject.SetActive(false);
         Parasol_flg = false;
@@ -152,6 +151,7 @@ public class TestJump_ver2 : MonoBehaviour {
     {
         //移動関連
 
+        //横移動入力(キーボード)
         if (Input.GetKey(KeyCode.RightArrow))
         {
             x = speed;
@@ -163,7 +163,7 @@ public class TestJump_ver2 : MonoBehaviour {
         }
 
         //アニメーション
-        if (Input.GetAxis("Horizontal") == 1 || Input.GetAxis("Horizontal") == -1)
+        if (Input.GetAxis("Horizontal") >= 0.1 || Input.GetAxis("Horizontal") <= -0.1)
         {
             if (jumpKey == 0)
             {
@@ -197,23 +197,6 @@ public class TestJump_ver2 : MonoBehaviour {
         }
 
         //パラソルの入力判定
-        //if (!isGrounded)
-        //{
-        //    if (Input.GetButtonDown("R1"))
-        //    {
-        //        if (!Parasol_flg)
-        //        {
-        //            Parasol.gameObject.SetActive(true);
-        //            Parasol_flg = true;
-        //        }
-        //        else if (Parasol_flg)
-        //        {
-        //            audioSource.PlayOneShot(sound1);
-        //            Parasol.gameObject.SetActive(false);
-        //            Parasol_flg = false;
-        //        }
-        //    }
-        //}
         if (Input.GetButtonDown("R1"))
         {
             if (!Parasol_flg)
@@ -228,12 +211,6 @@ public class TestJump_ver2 : MonoBehaviour {
                 Parasol_flg = false;
             }
         }
-        //if (isGrounded)
-        //{
-        //    //地面にいるならパラソルを消す
-        //    Parasol.gameObject.SetActive(false);
-        //    Parasol_flg = false;
-        //}
     }
 
     //デバッグモードの移動処理
@@ -281,20 +258,19 @@ public class TestJump_ver2 : MonoBehaviour {
             restartPoint = collision.transform.position;
             pos_p = restartPoint;
             Destroy(collision.gameObject);
-        }else if(collision.tag == "Respaen2")
+        }
+        else if(collision.tag == "Respaen2")
         {
             restartPoint = collision.transform.position;
             pos_p2 = restartPoint;
             Destroy(collision.gameObject);
         }
+
         if (collision.tag == "stage1")
         {
             st1 = true;
         }
-        if (collision.tag == "fade")
-        {
-            Fade = true;
-        }
+
     }
 
     //2D当たり判定
@@ -304,10 +280,12 @@ public class TestJump_ver2 : MonoBehaviour {
         if (collision.gameObject.tag == "Rain_Green")
         {
             Raintype = 1;
-        }else if (collision.gameObject.tag == "Rain_White")
+        }
+        else if (collision.gameObject.tag == "Rain_White")
         {
             Raintype = 2;
-        } else if (collision.gameObject.tag == "Rain_Red")
+        }
+        else if (collision.gameObject.tag == "Rain_Red")
         {
             Raintype = 3;
         }
@@ -321,7 +299,6 @@ public class TestJump_ver2 : MonoBehaviour {
     void OnCollisionExit2D(Collision2D collision)
     {
         fix = false;
-        //Raintype = 0;
     }
 
     //Unity内の指定回数毎秒回す

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Delete : MonoBehaviour {
 
+    public bool fix = false;
+
     //GameObject obj;
 
     //void Start()
@@ -18,6 +20,10 @@ public class Delete : MonoBehaviour {
             || collision.gameObject.tag == "Rain_White")
         {
             Destroy(collision.gameObject);
+        }
+        if(collision.gameObject.tag == "Rain_Red")
+        {
+            fix = true;
         }
     }
 }
