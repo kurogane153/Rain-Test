@@ -95,11 +95,11 @@ public class TestJump_ver2 : MonoBehaviour {
         }
         if (ScreenTransition.title)
         {
-            Vector3 pos;
-            pos.x = -12.18725f;
-            pos.y = -3.5f;
-            pos.z = 0f;
-            this.transform.position = pos;
+            //Vector3 pos;
+            //pos.x = -12.18725f;
+            //pos.y = -3.5f;
+            //pos.z = 0f;
+            //this.transform.position = pos;
             ScreenTransition.title = false;
         }
         Parasol.gameObject.SetActive(false);

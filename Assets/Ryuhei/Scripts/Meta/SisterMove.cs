@@ -54,7 +54,7 @@ public class SisterMove : MonoBehaviour {
         }
 
 
-        Debug.Log(PlayerPositionX);
+        
     }
 
     //private void OnLevelWasLoaded(int level)

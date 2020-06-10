@@ -82,7 +82,7 @@ public class CameraSwitching2 : MonoBehaviour
                 {
                     FadeInSwitch = true;
                     subCamera.SetActive(true);
-                    Debug.Log("SepiaTrue");
+
                 }
 
                 if (FadeInSwitch == true)
@@ -117,6 +117,6 @@ public class CameraSwitching2 : MonoBehaviour
 
         Destroy(this.gameObject);
 
-        Debug.Log("sepiaOFF");
+
     }
 }

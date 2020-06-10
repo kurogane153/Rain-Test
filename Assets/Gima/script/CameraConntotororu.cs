@@ -90,6 +90,7 @@ public class CameraConntotororu : MonoBehaviour
                 pos_p.y += 5;
             }
             mainCamera.transform.position = pos_p;
+            fix = true;
             tri = true;
             GameOver.ris = false;
         }
@@ -106,6 +107,7 @@ public class CameraConntotororu : MonoBehaviour
     // プレイヤーが地面に触れているかどうか
     void PlayerOnGrand()
     {
+        
         if (Player.transform.position.y <= -3.60f)
         {
             fix2 = false;
@@ -119,6 +121,18 @@ public class CameraConntotororu : MonoBehaviour
             }
         }
 
+        if (Player.transform.position.y <= 0.1f && CameraSwitching2.Res2)
+        {
+            fix2 = false;
+            if (Player.transform.position.y <= mainCamera.transform.position.y)
+            {
+                Y_camera = Player.transform.position.y + yAdjust+10;
+            }
+            if (Player.transform.position.y >= mainCamera.transform.position.y)
+            {
+                Y_camera = Player.transform.position.y + yAdjust+10;
+            }
+        }
     }
 
     void OnCollisionStay2D(Collision2D collision)
