@@ -109,17 +109,17 @@ public class TestJump_ver2 : MonoBehaviour {
     void Update()
     {
         //デバッグモードがONになっているか
-        if ((Input.GetButtonDown("Debug") || 
-            Input.GetKeyDown(KeyCode.Backspace)) && Debug_F == false)
-        {
-            Debug_F = true;
+        //if ((Input.GetButtonDown("Debug") || 
+        //    Input.GetKeyDown(KeyCode.Backspace)) && Debug_F == false)
+        //{
+        //    Debug_F = true;
 
-        }
-        else if ((Input.GetButtonDown("Debug") || 
-            Input.GetKeyDown(KeyCode.Backspace)) && Debug_F == true)
-        {
-            Debug_F = false;
-        }
+        //}
+        //else if ((Input.GetButtonDown("Debug") || 
+        //    Input.GetKeyDown(KeyCode.Backspace)) && Debug_F == true)
+        //{
+        //    Debug_F = false;
+        //}
 
         //デバッグモードがOFFなら
         if (!Debug_F)
