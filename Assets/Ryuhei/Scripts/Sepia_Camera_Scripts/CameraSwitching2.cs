@@ -75,7 +75,7 @@ public class CameraSwitching2 : MonoBehaviour
 
                 if (FadeInSwitch == false)
                 {
-                    A += 0.0050f;
+                    A += 0.015f;
                 }
 
                 if (A >= 1.0f && FadeInSwitch == false)
@@ -87,7 +87,7 @@ public class CameraSwitching2 : MonoBehaviour
 
                 if (FadeInSwitch == true)
                 {
-                    A -= 0.0050f;
+                    A -= 0.015f;
 
                 }
             }
