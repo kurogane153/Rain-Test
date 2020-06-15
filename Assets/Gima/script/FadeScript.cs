@@ -53,7 +53,10 @@ public class FadeScript : MonoBehaviour
             {
                 triangle = true;
             }
-            ResPown();
+            if (CameraSwitching2.ThisEventOnTrigger == false && GateR2.EDInisSwitch == false
+            && GateR.EDInisSwitch == false) { 
+                ResPown();
+            }
             PlayerOnRain();
             Fade();
             GreenRain();
@@ -170,7 +173,7 @@ public class FadeScript : MonoBehaviour
     void GreenRain()
     {
         //頭・体に緑が触れたら
-        if (hed.gameObject.GetComponent<Delete>().fix == true || Player.gameObject.GetComponent<TestJump_ver2>().Raintype == 3)
+        if (hed.gameObject.GetComponent<hedDelete>().fix == true || Player.gameObject.GetComponent<TestJump_ver2>().Raintype == 3)
         {
             GetComponent<Image>().color = new Color(red, green, blue, alfa3);
             alfa3 += speed;

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Delete : MonoBehaviour {
+public class hedDelete : MonoBehaviour {
 
     public bool fix = false;
 
@@ -10,9 +10,13 @@ public class Delete : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Rain" || collision.gameObject.tag == "Rain_Green"
-            || collision.gameObject.tag == "Rain_White" || collision.gameObject.tag == "Rain_Red")
+            || collision.gameObject.tag == "Rain_White")
         {
             Destroy(collision.gameObject);
+        }
+        if (collision.gameObject.tag == "Rain_Red")
+        {
+            fix = true;
         }
     }
 }

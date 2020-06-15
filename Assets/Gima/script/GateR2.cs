@@ -9,7 +9,7 @@ public class GateR2 : MonoBehaviour {
     float alfa;
     private float Rot = 0.0f;
     private GameObject Player;
-    private bool EDInisSwitch = false;
+    static public bool EDInisSwitch = false;
     private Image Img;
     private GameObject image_object;
     float speed = 0.01f;
@@ -25,7 +25,7 @@ public class GateR2 : MonoBehaviour {
     void Update()
     {
 
-        if (160.0f <= Player.transform.position.x)
+        if (167.50f <= Player.transform.position.x)
         {
             EDInisSwitch = true;
         }
@@ -51,9 +51,9 @@ public class GateR2 : MonoBehaviour {
                 {
                     //FadeScript.ReStart = false;
                     TestJump_ver2.st1 = false;
+                    EDInisSwitch = false;
                     SceneManager.LoadScene("SecondMovie");
                 }
-                EDInisSwitch = false;
             }
         }
     }

@@ -19,9 +19,13 @@ public class Audio2 : MonoBehaviour {
 
         if (Input.GetButtonDown("B"))
         {
-            if (Player.gameObject.GetComponent<TestJump_ver2>().isGrounded)
+            if (CameraSwitching2.ThisEventOnTrigger == false && GateR2.EDInisSwitch == false
+            && GateR.EDInisSwitch == false)
             {
-                audioSource.PlayOneShot(sound1);
+                if (Player.gameObject.GetComponent<TestJump_ver2>().isGrounded)
+                {
+                    audioSource.PlayOneShot(sound1);
+                }
             }
         }
     }

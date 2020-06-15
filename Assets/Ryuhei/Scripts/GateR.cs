@@ -9,7 +9,7 @@ public class GateR : MonoBehaviour {
     float alfa;
     private float Rot = 0.0f;
     private GameObject Player;
-    private bool EDInisSwitch = false;
+    static public bool EDInisSwitch = false;
     private Image Img;
     private GameObject image_object;
     float speed = 0.01f;
@@ -23,7 +23,7 @@ public class GateR : MonoBehaviour {
 
     void Update () {
 
-        if (297.0f <= Player.transform.position.x)
+        if (306.50f <= Player.transform.position.x)
         {
             EDInisSwitch = true;
         }
@@ -48,9 +48,9 @@ public class GateR : MonoBehaviour {
                 }
                 else if (alfa > 1.0f)
                 {
+                    EDInisSwitch = false;
                     SceneManager.LoadScene("Last_MV");
                 }
-                EDInisSwitch = false;
             }
         }
 	}

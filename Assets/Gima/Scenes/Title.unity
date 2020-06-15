@@ -859,6 +859,11 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 114804351042560392, guid: a974d39f0b7f64c4e875a12739ac08c2,
+        type: 2}
+      propertyPath: m_Text
+      value: Credit
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a974d39f0b7f64c4e875a12739ac08c2, type: 2}
   m_IsPrefabParent: 0

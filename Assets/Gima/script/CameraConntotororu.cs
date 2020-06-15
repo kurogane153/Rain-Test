@@ -48,6 +48,8 @@ public class CameraConntotororu : MonoBehaviour
         mainCamera = GameObject.Find("Main Camera");
         feda = GameObject.Find("Fade");
         mainCamera.transform.Rotate(xRotation, yRotation, zRotation);
+        Y_camera = Player.transform.position.y + yAdjust;
+        mainCamera.transform.position = new Vector3(Player.transform.position.x, Y_camera, zAdjust);
     }
 
     void Update()

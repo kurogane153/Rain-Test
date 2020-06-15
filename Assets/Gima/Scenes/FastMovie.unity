@@ -120,6 +120,26 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 328435512104606162, guid: 701c344921bdfd8488eda6e2d815faaf,
+        type: 2}
+      propertyPath: m_DirectAudioMutes.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 328435512104606162, guid: 701c344921bdfd8488eda6e2d815faaf,
+        type: 2}
+      propertyPath: m_TargetAudioSources.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 328435512104606162, guid: 701c344921bdfd8488eda6e2d815faaf,
+        type: 2}
+      propertyPath: m_DirectAudioVolumes.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 328435512104606162, guid: 701c344921bdfd8488eda6e2d815faaf,
+        type: 2}
+      propertyPath: m_EnabledAudioTracks.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4261001124937500, guid: 701c344921bdfd8488eda6e2d815faaf, type: 2}
       propertyPath: m_LocalPosition.x
       value: -0.000154
@@ -151,6 +171,37 @@ Prefab:
     - target: {fileID: 4261001124937500, guid: 701c344921bdfd8488eda6e2d815faaf, type: 2}
       propertyPath: m_RootOrder
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 328435512104606162, guid: 701c344921bdfd8488eda6e2d815faaf,
+        type: 2}
+      propertyPath: m_VideoClip
+      value: 
+      objectReference: {fileID: 32900000, guid: fcb4ccf42f116bd42905f744aed1ec85,
+        type: 3}
+    - target: {fileID: 23688456800540126, guid: 701c344921bdfd8488eda6e2d815faaf,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: cf07febb2084db64bbb0b33e2dcdfc92, type: 2}
+    - target: {fileID: 328435512104606162, guid: 701c344921bdfd8488eda6e2d815faaf,
+        type: 2}
+      propertyPath: m_TargetTexture
+      value: 
+      objectReference: {fileID: 8400000, guid: 1e907dd4600bbf148a908f600f98ac2c, type: 2}
+    - target: {fileID: 328435512104606162, guid: 701c344921bdfd8488eda6e2d815faaf,
+        type: 2}
+      propertyPath: m_DirectAudioVolumes.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 328435512104606162, guid: 701c344921bdfd8488eda6e2d815faaf,
+        type: 2}
+      propertyPath: m_EnabledAudioTracks.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 328435512104606162, guid: 701c344921bdfd8488eda6e2d815faaf,
+        type: 2}
+      propertyPath: m_ControlledAudioTrackCount
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 701c344921bdfd8488eda6e2d815faaf, type: 2}

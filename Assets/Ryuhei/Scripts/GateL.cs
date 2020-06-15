@@ -20,7 +20,7 @@ public class GateL : MonoBehaviour {
     // Update is called once per frame
     void Update () {
 
-        if (297.0f <= Player.transform.position.x)
+        if (306.50f <= Player.transform.position.x)
         {
             EDInisSwitch = true;
         }
@@ -37,7 +37,7 @@ public class GateL : MonoBehaviour {
 
             if (Rot > 0.50f)
             {
-                EDInisSwitch = false;
+                //EDInisSwitch = false;
             }
         }
 	}

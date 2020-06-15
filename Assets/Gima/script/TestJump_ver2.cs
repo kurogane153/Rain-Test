@@ -109,13 +109,13 @@ public class TestJump_ver2 : MonoBehaviour {
     void Update()
     {
         //デバッグモードがONになっているか
-        //if ((Input.GetButtonDown("Debug") || 
+        //if ((Input.GetButtonDown("Debug") ||
         //    Input.GetKeyDown(KeyCode.Backspace)) && Debug_F == false)
         //{
         //    Debug_F = true;
 
         //}
-        //else if ((Input.GetButtonDown("Debug") || 
+        //else if ((Input.GetButtonDown("Debug") ||
         //    Input.GetKeyDown(KeyCode.Backspace)) && Debug_F == true)
         //{
         //    Debug_F = false;
@@ -128,6 +128,7 @@ public class TestJump_ver2 : MonoBehaviour {
             GroundEnter();
             //キー入力
             InputKey();
+           
         }
         else
         {
@@ -161,7 +162,7 @@ public class TestJump_ver2 : MonoBehaviour {
         {
             x = -speed;
         }
-
+        
         //アニメーション
         if (Input.GetAxis("Horizontal") >= 0.1 || Input.GetAxis("Horizontal") <= -0.1)
         {
@@ -176,40 +177,54 @@ public class TestJump_ver2 : MonoBehaviour {
             _animator.SetFloat("walk", Input.GetAxis("Horizontal"));
         }
 
-        // ジャンプキー取得
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("B") )
+
+        if (CameraSwitching2.ThisEventOnTrigger == false && GateR2.EDInisSwitch == false
+            && GateR.EDInisSwitch == false)
         {
-
-            jumpKey = 1;
-
-        }
-        else if (Input.GetKey(KeyCode.Space) || Input.GetButton("B"))
-        {
-
-            jumpKey = 2;
-
-        }
-        else if (Input.GetKeyUp(KeyCode.Space) || Input.GetButtonUp("B"))
-        {
-
-            jumpKey = 0;
-
-        }
-
-        //パラソルの入力判定
-        if (Input.GetButtonDown("R1"))
-        {
-            if (!Parasol_flg)
+                // ジャンプキー取得
+                if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("B"))
             {
-                Parasol.gameObject.SetActive(true);
-                Parasol_flg = true;
+
+                jumpKey = 1;
+
             }
-            else if (Parasol_flg)
+            else if (Input.GetKey(KeyCode.Space) || Input.GetButton("B"))
             {
-                audioSource.PlayOneShot(sound1);
-                Parasol.gameObject.SetActive(false);
-                Parasol_flg = false;
+
+                jumpKey = 2;
+
             }
+            else if (Input.GetKeyUp(KeyCode.Space) || Input.GetButtonUp("B"))
+            {
+
+                jumpKey = 0;
+
+            }
+
+            if (Input.GetButtonDown("R1"))
+            {
+
+                if (!Parasol_flg)
+                {
+                    Parasol.gameObject.SetActive(true);
+                    Parasol_flg = true;
+                }
+                else if (Parasol_flg)
+                {
+                    audioSource.PlayOneShot(sound1);
+                    Parasol.gameObject.SetActive(false);
+                    Parasol_flg = false;
+                }
+            }
+        }
+
+        if (CameraSwitching2.ThisEventOnTrigger == false && GateR2.EDInisSwitch == false
+            && GateR.EDInisSwitch == false)
+        {
+            
+        }else
+        {
+            _animator.SetFloat("walk", 0);
         }
     }
 
@@ -244,6 +259,7 @@ public class TestJump_ver2 : MonoBehaviour {
             y = Input.GetAxis("Vertical");
             gameObject.transform.position += new Vector3(x * speed, y * speed);
         }
+
         if (Input.GetButton("triangle"))
         {
             this.transform.position = DebugRes.transform.position;
@@ -309,7 +325,10 @@ public class TestJump_ver2 : MonoBehaviour {
             _animator.SetBool("Jump", false);
             //横移動
             x = Input.GetAxis("Horizontal");
-            gameObject.transform.position += new Vector3(x * speed, 0);
+            if (CameraSwitching2.ThisEventOnTrigger == false && GateR2.EDInisSwitch == false
+                && GateR.EDInisSwitch == false) {
+                gameObject.transform.position += new Vector3(x * speed, 0);
+            }
 
             //地面にいるとき
             if (isGrounded)
